@@ -65,6 +65,6 @@ Use the following state:
 - Try your best to make it look like the example
 
 
-## Rubrice
+## Rubric
 
 ![calculatorRubric](./calculatorRubric.png)
