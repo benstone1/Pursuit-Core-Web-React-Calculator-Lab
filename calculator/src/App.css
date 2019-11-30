@@ -1,22 +1,44 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #09d3ac;
+.button {
+  background-color: #e0e0e6;
+  font-size: 40px;
+  text-align: center;
+  color: #666666;
+  border-left: 1px solid #666666;
+  border-bottom: 1px solid #666666;
+  user-select: none;
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  display: block;
+  width: 100px;
+}
+
+button:active {
+  box-shadow: inset 0px 0px 80px 0px rgba(0, 0, 0, 0.25);
+}
+
+.orange {
+  background-color: #ee9b3e;
+  color: #fff;
+}
+
+.calc {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
