@@ -31,13 +31,15 @@ const Calculator = {
       answer = previousValue % currentVal;
     }
 
-    return {
-      ...state,
-      displayValue: answer,
-      previousValue: answer,
-      operation: input,
-      waitingForNewValue: true
-    };
+    return answer;
+
+    // return {
+    //   ...state,
+    //   displayValue: answer,
+    //   previousValue: answer,
+    //   operation: input,
+    //   waitingForNewValue: true
+    // };
   },
 
   handleFirstOperation: (state, input) => {
@@ -52,11 +54,11 @@ const Calculator = {
 
   handleNextOperation: (state, input, answer) => {
     const number = state.displayValue;
-    console.log("Number: ", number);
+    console.log("Handle Next operation");
     return {
       ...state,
       previousValue: number,
-      displayValue: answer,
+      displayValue: answer ? answer : number,
       operation: input,
       waitingForNewValue: true
     };
@@ -67,7 +69,7 @@ const Calculator = {
       displayValue: 0,
       previousValue: null,
       operation: null,
-      waitingForNewValue: false
+      waitingForNewValue: true
     };
   }
 };

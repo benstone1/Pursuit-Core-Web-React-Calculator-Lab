@@ -10,7 +10,7 @@ class Container extends React.Component {
       displayValue: 0,
       previousValue: null,
       operation: null,
-      waitingForNewValue: false
+      waitingForNewValue: true
     };
   }
   // 1) ### => oper => dV = 0, pV = dV, op = target
@@ -26,9 +26,6 @@ class Container extends React.Component {
     }
 
     const input = e.target.innerText;
-
-    console.log("Input: ", input);
-    console.log("State: ", this.state);
 
     // Clear input/state
     if (input === "AC") {
@@ -46,36 +43,46 @@ class Container extends React.Component {
 
     // Calculate the inputs based on given operation
     if ("÷x-+%".includes(input)) {
-      console.log("Included: ", input);
-      if (this.state.operation === null || this.state.previousValue === null) {
+      console.log("Not Equal sign");
+      // if (this.state.waitingForNewValue) {
+      //   return this.setState({
+      //     operation: input
+      //   });
+      // }
+      if (this.state.operation === null) {
         return this.setState(
           Calculator.handleFirstOperation(this.state, input)
         );
       } else {
         // Compute current and prev input
-        console.log("else");
-        return this.setState(Calculator.compute(this.state, input));
+        console.log("Equal sign");
+        const answer = Calculator.compute(this.state, input);
+        // return this.setState(Calculator.compute(this.state, input));
+        return this.setState(
+          Calculator.handleNextOperation(this.state, input, answer)
+        );
       }
     }
 
     if (input === "=") {
-      return this.setState({
-        ...this.state,
-        displayValue: 0,
-        previousValue: ""
-      });
+      const answer = Calculator.compute(this.state, this.state.operation);
+      console.log("Input; =");
+      return this.setState(
+        Calculator.handleNextOperation(this.state, "=", answer)
+      );
     }
 
-    if (this.state.waitingForNewValue) {
-      this.setState({
-        ...this.state,
-        displayValue: this.state.displayValue
-          ? this.state.displayValue + input
-          : input
-      });
-    }
+    // if (this.state.waitingForNewValue) {
+    this.setState({
+      ...this.state,
+      waitingForNewValue: true,
+      displayValue: this.state.waitingForNewValue
+        ? input
+        : this.state.displayValue + input
+    });
+    // }
 
-    console.log("History: ", this.state.previousValue);
+    console.log(" ");
   };
 
   render() {
