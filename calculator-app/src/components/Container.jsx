@@ -7,7 +7,7 @@ class Container extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayValue: "0",
+      displayValue: 0,
       previousValue: null,
       operation: null,
       waitingForNewValue: false
@@ -18,66 +18,64 @@ class Container extends React.Component {
   // 2) ### => oper => ### => op/= => ### => A/C => dV= 0, waiting = waitingForNewValue
   // 3) 2 => A/C => dV = 0, oper = null, pV = null, waiting = False
 
-  clearDisplay = () => {
-    this.setState(Calculator.clearDisplay(this.state));
-    // if (this.state.waitingForNewValue) {
-    //   return this.setState({ ...this.state, displayValue: "0" });
-    // }
-    // return this.setState({ ...this.state, display: "0" });
-  };
-
   handleClick = e => {
     const className = e.target.className;
 
     if (className === "container" || className === "display") {
-      return;
+      return; // Return when clicking area that is not a button
     }
 
     const input = e.target.innerText;
 
     console.log("Input: ", input);
+    console.log("State: ", this.state);
 
+    // Clear input/state
     if (input === "AC") {
-      return this.clearDisplay();
+      if (this.waitingForNewValue) {
+        return this.setState(Calculator.clearDisplay(this.state)); // Clear Current number
+      } else {
+        return this.setState(Calculator.resetState(this.state)); // Clear current state
+      }
     }
 
-    if (input === "÷" || input === "x" || input === "-" || input === "+") {
-      const currAns = eval(this.state.history);
-      return this.setState({
-        ...this.state,
-        displayValue: currAns,
-        history: currAns
-      });
+    // Toggle input/display number to a +/-
+    if (input === "±") {
+      return this.setState(Calculator.changeInputSign(this.state));
+    }
+
+    // Calculate the inputs based on given operation
+    if ("÷x-+%".includes(input)) {
+      console.log("Included: ", input);
+      if (this.state.operation === null || this.state.previousValue === null) {
+        return this.setState(
+          Calculator.handleFirstOperation(this.state, input)
+        );
+      } else {
+        // Compute current and prev input
+        console.log("else");
+        return this.setState(Calculator.compute(this.state, input));
+      }
     }
 
     if (input === "=") {
       return this.setState({
         ...this.state,
-        displayValue: eval(this.state.history),
-        history: ""
+        displayValue: 0,
+        previousValue: ""
       });
     }
-    if (input === "±") {
-      return this.state.displayValue[0] === "-"
-        ? this.setState({
-            ...this.state,
-            displayValue: this.state.displayValue.slice(1)
-          })
-        : this.setState({
-            ...this.state,
-            displayValue: "-" + this.state.displayValue
-          });
+
+    if (this.state.waitingForNewValue) {
+      this.setState({
+        ...this.state,
+        displayValue: this.state.displayValue
+          ? this.state.displayValue + input
+          : input
+      });
     }
 
-    this.setState({
-      ...this.state,
-      displayValue: this.state.history
-        ? this.state.displayValue + input
-        : input,
-      history: this.state.history ? this.state.history + input : input
-    });
-
-    console.log("History: ", this.state.history);
+    console.log("History: ", this.state.previousValue);
   };
 
   render() {
