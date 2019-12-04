@@ -14,13 +14,13 @@ function App() {
       </div>
         <button className='button'>button</button>
         
-        <div className='operations'>
+        {/* <div className='operations'> */}
           <button className='orange' id = 'divide'>÷</button>
-          <button className='orange'>x</button>
-          <button className='orange'>-</button>
-          <button className='orange'>+</button>
-          <button className='orange'>=</button>
-        </div>
+          <button className='orange' id = 'multiply'>x</button>
+          <button className='orange'id = 'subtract'>-</button>
+          <button className='orange'id = 'addition'>+</button>
+          <button className='orange'id = 'equals'>=</button>
+        {/* </div> */}
       </div>
     </div>
   );
