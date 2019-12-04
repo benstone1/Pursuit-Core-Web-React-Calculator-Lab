@@ -83,7 +83,27 @@ width: 25%;
   grid-row: 3 / 7; */
 }
 #divide{
-  display: grid;
-  grid-column: 3 / 4;
-  grid-row: 2 / 4;
+  /* display: grid; */
+  grid-column: 4;
+  grid-row: 3;
+}
+#multiply{
+  /* display: grid; */
+  grid-column: 4;
+  grid-row: 4;
+}
+#subtract{
+  /* display: grid; */
+  grid-column: 4;
+  grid-row: 5;
+}
+#addition{
+  /* display: grid; */
+  grid-column: 4;
+  grid-row: 6;
+}
+#equals{
+  /* display: grid; */
+  grid-column: 4;
+  grid-row: 7;
 }
