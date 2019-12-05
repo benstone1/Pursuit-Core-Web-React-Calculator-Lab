@@ -31,7 +31,7 @@ const Calculator = {
       answer = previousValue % currentVal;
     }
 
-    return answer;
+    return answer ? answer.toFixed(0) : answer;
 
     // return {
     //   ...state,
@@ -53,11 +53,14 @@ const Calculator = {
   },
 
   handleNextOperation: (state, input, answer) => {
+    if (state.waitingForNewValue) {
+      return;
+    }
     const number = state.displayValue;
     console.log("Handle Next operation");
     return {
       ...state,
-      previousValue: number,
+      previousValue: answer,
       displayValue: answer ? answer : number,
       operation: input,
       waitingForNewValue: true

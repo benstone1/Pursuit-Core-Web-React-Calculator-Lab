@@ -44,11 +44,14 @@ class Container extends React.Component {
     // Calculate the inputs based on given operation
     if ("÷x-+%".includes(input)) {
       console.log("Not Equal sign");
-      // if (this.state.waitingForNewValue) {
-      //   return this.setState({
-      //     operation: input
-      //   });
-      // }
+      if (this.state.waitingForNewValue && this.state.operation === null) {
+        return;
+      }
+      if (this.state.waitingForNewValue) {
+        return this.setState({
+          operation: input
+        });
+      }
       if (this.state.operation === null) {
         return this.setState(
           Calculator.handleFirstOperation(this.state, input)
@@ -75,7 +78,7 @@ class Container extends React.Component {
     // if (this.state.waitingForNewValue) {
     this.setState({
       ...this.state,
-      waitingForNewValue: true,
+      waitingForNewValue: false,
       displayValue: this.state.waitingForNewValue
         ? input
         : this.state.displayValue + input
