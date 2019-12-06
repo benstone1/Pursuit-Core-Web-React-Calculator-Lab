@@ -13,27 +13,25 @@ class Container extends React.Component {
       waitingForNewValue: true
     };
   }
-  // 1) ### => oper => dV = 0, pV = dV, op = target
-  //    => ### => oper/= => dV = prev + oper + dV, pV = dV, oper = null
-  // 2) ### => oper => ### => op/= => ### => A/C => dV= 0, waiting = waitingForNewValue
-  // 3) 2 => A/C => dV = 0, oper = null, pV = null, waiting = False
 
   handleClick = e => {
     const className = e.target.className;
 
+    // Do nothing when clicking a target area that is not a button
     if (className === "container" || className === "display") {
-      return; // Return when clicking area that is not a button
+      return;
     }
 
     const input = e.target.innerText;
 
-    // Clear input/state
+    // Clear Current number
+    if (input === "C") {
+      return this.setState(Calculator.clearDisplay(this.state));
+    }
+
+    // Clear current state
     if (input === "AC") {
-      if (this.waitingForNewValue) {
-        return this.setState(Calculator.clearDisplay(this.state)); // Clear Current number
-      } else {
-        return this.setState(Calculator.resetState(this.state)); // Clear current state
-      }
+      return this.setState(Calculator.resetState(this.state));
     }
 
     // Toggle input/display number to a +/-
@@ -57,10 +55,8 @@ class Container extends React.Component {
           Calculator.handleFirstOperation(this.state, input)
         );
       } else {
-        // Compute current and prev input
         console.log("Equal sign");
         const answer = Calculator.compute(this.state, input);
-        // return this.setState(Calculator.compute(this.state, input));
         return this.setState(
           Calculator.handleNextOperation(this.state, input, answer)
         );
@@ -75,7 +71,7 @@ class Container extends React.Component {
       );
     }
 
-    // if (this.state.waitingForNewValue) {
+    // Changes state for clicking any button from 0 - 9
     this.setState({
       ...this.state,
       waitingForNewValue: false,
@@ -83,16 +79,20 @@ class Container extends React.Component {
         ? input
         : this.state.displayValue + input
     });
-    // }
-
-    console.log(" ");
   };
 
   render() {
+    const toggleClearButton = typeof this.state.displayValue === 'string' ?
+      (
+        <Button className="grey" value="C" />
+      ) : (
+        <Button className="grey" value="AC" />
+      )
+
     return (
       <div className="container" onClick={this.handleClick}>
         <div className="display">{this.state.displayValue}</div>
-        <Button className="grey" value="AC" />
+        {toggleClearButton}
         <Button className="grey" value="%" />
         <Button className="grey" value="±" />
         <Button className="orange" value="÷" />

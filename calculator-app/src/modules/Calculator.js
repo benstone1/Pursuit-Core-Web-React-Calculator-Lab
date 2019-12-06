@@ -7,6 +7,13 @@ const Calculator = {
     }
   },
 
+  clearState: state => {
+    if (state.waitingForNewValue) {
+      return { ...state, displayValue: 0 };
+    }
+    return { ...state, displayValue: 0 };
+  },
+
   clearDisplay: state => {
     if (state.waitingForNewValue) {
       return { ...state, displayValue: 0 };
@@ -31,15 +38,7 @@ const Calculator = {
       answer = previousValue % currentVal;
     }
 
-    return answer ? answer.toFixed(0) : answer;
-
-    // return {
-    //   ...state,
-    //   displayValue: answer,
-    //   previousValue: answer,
-    //   operation: input,
-    //   waitingForNewValue: true
-    // };
+    return answer ? Number(answer.toFixed(0)) : answer;
   },
 
   handleFirstOperation: (state, input) => {
