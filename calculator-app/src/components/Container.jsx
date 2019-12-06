@@ -24,6 +24,10 @@ class Container extends React.Component {
 
     const input = e.target.innerText;
 
+    if (this.state.operation === '=' && !"÷x-+%AC".includes(input)) {
+      return;
+    }
+
     // Clear Current number
     if (input === "C") {
       return this.setState(Calculator.clearDisplay(this.state));
@@ -37,6 +41,10 @@ class Container extends React.Component {
     // Toggle input/display number to a +/-
     if (input === "±") {
       return this.setState(Calculator.changeInputSign(this.state));
+    }
+
+    if (input === '%') {
+      return this.setState(Calculator.divideByHundred(this.state));
     }
 
     // Calculate the inputs based on given operation

@@ -7,18 +7,8 @@ const Calculator = {
     }
   },
 
-  clearState: state => {
-    if (state.waitingForNewValue) {
-      return { ...state, displayValue: 0 };
-    }
-    return { ...state, displayValue: 0 };
-  },
-
   clearDisplay: state => {
-    if (state.waitingForNewValue) {
-      return { ...state, displayValue: 0 };
-    }
-    return { ...state, displayValue: 0 };
+    return { ...state, displayValue: 0, waitingForNewValue: true };
   },
 
   compute: (state, input) => {
@@ -38,7 +28,15 @@ const Calculator = {
       answer = previousValue % currentVal;
     }
 
-    return answer ? Number(answer.toFixed(0)) : answer;
+    return answer ? Number(answer.toFixed(2)) : answer;
+  },
+
+  divideByHundred: state => {
+    const dividedNum = Number(state.displayValue) / 100;
+    return {
+      ...state,
+      displayValue: dividedNum.toFixed(2)
+    }
   },
 
   handleFirstOperation: (state, input) => {
