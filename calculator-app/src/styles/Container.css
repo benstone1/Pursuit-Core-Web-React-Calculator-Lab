@@ -66,6 +66,9 @@
   justify-content: flex-end;
   align-items: center;
   font-size: 80px;
+  width: 360px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
 }
 
 .zero {
