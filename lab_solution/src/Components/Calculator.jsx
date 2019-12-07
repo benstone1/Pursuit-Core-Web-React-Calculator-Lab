@@ -118,12 +118,12 @@ export default class Calculator extends React.Component {
 
 
     handlePercentBtn = () => {
-        
+        this.setState({displayValue: parseFloat(this.state.displayValue)/100})
     }
 
 
     handleSwitchSignBtn = () => {
-        
+        this.setState({displayValue: parseFloat(this.state.displayValue)*(-1)})
     }
 
     //######################## RENDER ########################
