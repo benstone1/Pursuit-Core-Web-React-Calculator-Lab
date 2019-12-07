@@ -69,11 +69,11 @@ export default class Calculator extends React.Component {
         let btnValue = value;
         let screen = this.state.displayValue;
 
-        if (btnValue === '.' && (screen === '0' || this.state.expectingNewValue)) {
+        if (btnValue === '.' && (!parseFloat(screen) || this.state.expectingNewValue)) {
             btnValue = '0.'
         }
 
-        if (screen === '0' || this.state.expectingNewValue) {
+        if (!parseFloat(screen) || this.state.expectingNewValue) {
             screen = btnValue;
             if (this.state.expectingNewValue) {
                 this.setState({
