@@ -55,7 +55,7 @@ export default class Calculator extends React.Component {
             })
             
             if (arithmeticResult) {
-                this.setState({displayValue: arithmeticResult})
+                this.setState({displayValue: arithmeticResult + ''})
             }
         }
         this.setState({
@@ -69,11 +69,11 @@ export default class Calculator extends React.Component {
         let btnValue = value;
         let screen = this.state.displayValue;
 
-        if (btnValue === '.' && (!parseFloat(screen) || this.state.expectingNewValue)) {
+        if (btnValue === '.' && (screen === '0' || this.state.expectingNewValue)) {
             btnValue = '0.'
         }
 
-        if (!parseFloat(screen) || this.state.expectingNewValue) {
+        if (screen === '0' || this.state.expectingNewValue) {
             screen = btnValue;
             if (this.state.expectingNewValue) {
                 this.setState({
@@ -99,7 +99,7 @@ export default class Calculator extends React.Component {
         }
 
         this.setState({
-            displayValue: arithmeticResult,
+            displayValue: arithmeticResult + '',
             previousValue: 0,
             operation: null,
             reset: 'AC',
@@ -118,12 +118,12 @@ export default class Calculator extends React.Component {
 
 
     handlePercentBtn = () => {
-        this.setState({displayValue: parseFloat(this.state.displayValue)/100})
+        this.setState({displayValue: (parseFloat(this.state.displayValue)/100)+''})
     }
 
 
     handleSwitchSignBtn = () => {
-        this.setState({displayValue: parseFloat(this.state.displayValue)*(-1)})
+        this.setState({displayValue: (parseFloat(this.state.displayValue)*(-1))+''})
     }
 
     //######################## RENDER ########################
