@@ -4,6 +4,36 @@ import './Calculator.css';
 import Button from './Button';
 
 
+const sum = (a, b) => a + b;
+const sub = (a, b) => a - b;
+const mul = (a, b) => a * b;
+const division = (a, b) => a / b;
+
+const doTheMath = (op, a, b) => {
+    const num1 = parseFloat(a)
+    const num2 = parseFloat(b)
+    let result
+    
+    switch (op) {
+        case '+':
+            result = sum(num1, num2)
+            break;
+        case '-':
+            result = sub(num1, num2)
+            break;
+        case 'x':
+            result = mul(num1, num2)
+            break;
+        case '÷':
+            result = division(num1, num2)
+            break;
+        default:
+            result = null
+            break;
+    }
+    return result
+}
+
 
 export default class Calculator extends React.Component {
     initialState = {
@@ -16,12 +46,26 @@ export default class Calculator extends React.Component {
 
     state = {...this.initialState}
 
-    handleOperationBtn = event => {
-        
+    handleOperationBtn = value => {
+        if (!this.state.expectingNewValue) {
+            const arithmeticResult = doTheMath(this.state.operation, this.state.previousValue, this.state.displayValue);   
+            this.setState({
+                previousValue: this.state.displayValue,
+                expectingNewValue: true
+            })
+            
+            if (arithmeticResult) {
+                this.setState({displayValue: arithmeticResult})
+            }
+        }
+        this.setState({
+            operation: value,
+            reset: 'AC'
+        })
     }
 
 
-    handleNumericalBtn = event => {
+    handleNumericalBtn = value => {
         
     }
     
@@ -31,7 +75,7 @@ export default class Calculator extends React.Component {
     }
 
 
-    handleResetBtn = event => {
+    handleResetBtn = value => {
         
     }
 
