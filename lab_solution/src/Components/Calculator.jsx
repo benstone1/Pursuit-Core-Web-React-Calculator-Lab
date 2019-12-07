@@ -109,7 +109,11 @@ export default class Calculator extends React.Component {
 
 
     handleResetBtn = value => {
-        
+        if (value === 'C') {
+            this.setState({displayValue: '0'})
+        } else {
+            this.setState(this.initialState)
+        }
     }
 
 
