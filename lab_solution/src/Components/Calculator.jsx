@@ -66,12 +66,45 @@ export default class Calculator extends React.Component {
 
 
     handleNumericalBtn = value => {
-        
+        let btnValue = value;
+        let screen = this.state.displayValue;
+
+        if (btnValue === '.' && (screen === '0' || this.state.expectingNewValue)) {
+            btnValue = '0.'
+        }
+
+        if (screen === '0' || this.state.expectingNewValue) {
+            screen = btnValue;
+            if (this.state.expectingNewValue) {
+                this.setState({
+                    previousValue: this.state.displayValue,
+                    expectingNewValue: false
+                })
+            }
+        } else {
+            screen += btnValue
+        }
+
+        this.setState({
+            displayValue: screen,
+            reset: 'C'
+        })
     }
     
 
     handleResultBtn = () => {
-        
+        let arithmeticResult = doTheMath(this.state.operation, this.state.previousValue, this.state.displayValue);
+        if (!arithmeticResult) {
+            arithmeticResult = this.state.displayValue;
+        }
+
+        this.setState({
+            displayValue: arithmeticResult,
+            previousValue: 0,
+            operation: null,
+            reset: 'AC',
+            expectingNewValue: true
+        })
     }
 
 
