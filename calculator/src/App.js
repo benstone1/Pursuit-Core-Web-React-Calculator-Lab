@@ -12,7 +12,7 @@ class App extends React.Component {
       previousValue: null,
       operation: null,
       waitingForNewValue: false,
-      // result: 0,
+      result: false,
       negative: false
     };
 
@@ -25,8 +25,8 @@ class App extends React.Component {
   handleInput = event => {
     let { input } = this.state
     this.setState({
-      // previousValue: this.state.displayValue,
-      input: parseFloat(input += event.target.innerText)
+      input: parseFloat(input += event.target.innerText),
+      displayValue: input
     });
   };
 
@@ -35,35 +35,37 @@ class App extends React.Component {
   };
 
   handleOperationButton = e => {
-    const { input } = this.state
-    this.setState({
-      operation: e.target.innerText,
-      previousValue: parseFloat(input),
+    const { input, waitingForNewValue, displayValue } = this.state;
+    const value = e.target.value;
 
+    waitingForNewValue ? this.setState({
+      ...this.prevState,
+      operation: value,
+      previousValue: parseFloat(displayValue),
+      input: ''
+    }) : this.setState({
+      ...this.prevState,
+      operation: value,
+      previousValue: parseFloat(input),
+      input: '',
+      waitingForNewValue: true
     });
-    this.handleMath()
   };
 
   handleMath = () => {
-    const { operation, previousValue } = this.state
-    if (operation === "+") {
+    const { operation, previousValue, input } = this.state
+    if (operation === "x") {
       this.setState({
-        // previousValue: parseFloat(input),
+        displayValue: parseFloat(previousValue) * parseFloat(input),
         input: '',
       })
-      return parseFloat(previousValue) + parseFloat(previousValue)
     }
   };
+  showAnswer = e => this.handleMath()
 
-  showAnswer = e => {
-    const { input, previousValue } = this.state
 
-    this.setState({
-      displayValue: parseFloat(previousValue) + parseFloat(input)
-    });
-  }
 
-  //converts between negative nad positive
+  //converts between negative and positive
   handleConversion = e => {
     const { displayValue, negative } = this.state
     if (negative === false) {
@@ -82,7 +84,7 @@ class App extends React.Component {
   handleSubmit = event => event.preventDefault();
 
   render() {
-    const { operation, displayValue, result } = this.state;
+    const { displayValue, result } = this.state;
 
     console.log(this.state);
 
@@ -96,7 +98,6 @@ class App extends React.Component {
             result={result}
           />
           <CalculatorForm
-            operation={operation}
             handleInput={this.handleInput}
             handleOperationButton={this.handleOperationButton}
             handleMath={this.handleMath}
