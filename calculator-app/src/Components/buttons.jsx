@@ -4,13 +4,12 @@ const Calculator = (props) => {
     return (
         <div className='calculator-whole'>
 
+            <input className='input-stage' type='text' placeholder='0' value={props.display} readOnly />
 
-            <input className='input-stage' type='text' value={props.display} readOnly />
-            
-            {(props.method === null) ? 
-            <input type='button' className='button' id='all-clear' onClick={props.allClearClick} value='AC' /> : 
-            <input type='button' className='button' id='clear' onClick={props.clearClick} value='C' />}
-            
+            {(props.method === null) ?
+                <input type='button' className='button' id='all-clear' onClick={props.allClearClick} value='AC' /> :
+                <input type='button' className='button' id='clear' onClick={props.clearClick} value='C' />}
+
             <input type='button' className='button' id='percent' onClick={props.percentageClick} value='%' />
             <input type='button' className='button' id='negative' onClick={props.negateClick} value='±' />
             <input type='button' className='button orange' id='divide' onClick={props.divClick} value='÷' />
