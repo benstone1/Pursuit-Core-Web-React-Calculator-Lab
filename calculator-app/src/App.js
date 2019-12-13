@@ -9,14 +9,14 @@ class App extends React.Component {
       num1: '',
       num2: '',
       method: null,
-      display: 0
+      display: ''
     }
   }
   allClearClick = () => {
     this.setState({
       num1: '',
       num2: '',
-      display: 0,
+      display: '',
       method: null
     })
   }
@@ -58,31 +58,46 @@ class App extends React.Component {
     }
   }
   addClick = () => {
+    let {display} = this.state;
     this.setState({
-      method: 'addition'
+      method: 'addition',
+      num1: display,
+      num2:''
     })
   }
   subClick = () => {
+    let {display} = this.state;
     this.setState({
       method: 'subtraction',
-
+      num1: display,
+      num2:''
     })
   }
   divClick = () => {
+    let {display} = this.state;
     this.setState({
       method: 'division',
-
+      num1: display,
+      num2:''
     })
   }
   mulClick = () => {
+    let {display} = this.state;
     this.setState({
       method: 'multiplication',
-
+      num1: display,
+      num2:''
     })
   }
   equalsClick = () => {
-    let { num1, num2, method } = this.state
-    if (method === 'addition') {
+    let { num1, num2, method, display } = this.state
+    if(method === 'equals'){
+      this.setState({
+        num1: display,
+        display: num1
+      })
+    }
+    else if (method === 'addition') {
       this.setState({
         display: Number(num1) + Number(num2),
         method: null
@@ -111,6 +126,9 @@ class App extends React.Component {
         })
       }
     }
+    this.setState({
+      method: 'equals'
+    })
   }
 
   numberClick = (element) => {
