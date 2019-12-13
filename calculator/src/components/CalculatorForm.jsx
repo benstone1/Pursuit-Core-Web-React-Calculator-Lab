@@ -14,7 +14,6 @@ class CalculatorForm extends Component {
                     <div className="buttons">
                         <button className="button col-3" onClick={this.props.allClear} value='AC'>AC</button>
                         <button className="button col-3" onClick={this.props.clear} value='C'>C</button>
-
                         <button
                             value='%'
                             className="button col-3"

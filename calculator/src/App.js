@@ -14,8 +14,13 @@ class App extends React.Component {
       waitingForNewValue: false,
       negative: false
     };
-
     this.state = this.initialState;
+  }
+
+  componentDidMount() {
+    this.showAnswer = e => this.handleMath()
+    console.log('yub');
+
   }
 
   handleInput = event => {
@@ -27,6 +32,7 @@ class App extends React.Component {
   };
 
   allClear = () => this.setState(this.initialState);
+
   clear = () => {
     this.setState({
       displayValue: 0,
@@ -40,12 +46,10 @@ class App extends React.Component {
     const value = e.target.value;
 
     waitingForNewValue ? this.setState({
-      ...this.prevState,
       operation: value,
       previousValue: parseFloat(displayValue),
       input: ''
     }) : this.setState({
-      ...this.prevState,
       operation: value,
       previousValue: parseFloat(input),
       input: '',
@@ -55,20 +59,43 @@ class App extends React.Component {
 
   handleMath = () => {
     const { operation, previousValue, input } = this.state
-    if (operation === "÷") {
-      this.setState({
-        displayValue: parseFloat(previousValue) / parseFloat(input),
-        input: '',
-      })
-    } else if (operation === "+") {
-      this.setState({
-        displayValue: parseFloat(previousValue) + parseFloat(input),
-        input: '',
-      })
+
+    switch (operation) {
+      case "÷":
+        this.setState({
+          displayValue: parseFloat(previousValue) / parseFloat(input),
+          input: '',
+        })
+        break;
+      case "+":
+        this.setState({
+          displayValue: parseFloat(previousValue) + parseFloat(input),
+          input: '',
+        })
+        break;
+      case "-":
+        this.setState({
+          displayValue: parseFloat(previousValue) - parseFloat(input),
+          input: '',
+        })
+        break;
+      case "x":
+        this.setState({
+          displayValue: parseFloat(previousValue) * parseFloat(input),
+          input: '',
+        })
+        break;
+      default:
+        this.setState({
+          input: ''
+        })
+        break;
     }
   };
 
-  showAnswer = e => this.handleMath()
+
+
+  // showAnswer = e => this.handleMath()
 
   percentage = e => {
     const { displayValue } = this.state
