@@ -34,11 +34,21 @@ button:active {
 .calc {
   display: flex;
   flex-direction: column;
-  width: 300px;
+  justify-content: center;
 }
 
 .buttons {
+  width: 600px;
+  height: 400px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+.display {
+  font-size: 5em;
+  color: #fff;
+  text-align: right;
+  background-color: #333;
 }
