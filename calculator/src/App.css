@@ -29,29 +29,47 @@ button:active {
 .orange {
   background-color: #ee9b3e;
   color: #fff;
+  height: 82px;
 }
 
 .calc {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
+  width: 90vw;
 }
 
 .buttons {
-  width: 762px;
-  height: 312px;
+  width: 50vw;
+  height: 412px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-right: -15px;
-  margin-left: -15px;
+  margin-right: -78px;
+  margin-left: -75px;
 }
 .display {
+  margin-right: -6px;
+  margin-left: -150px;
+  width: 50.4vw;
   font-size: 5em;
   color: #fff;
   text-align: right;
   background-color: #333;
 }
 .col-6 {
-  width: 362px;
+  width: 180px;
+}
+
+.holder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.operators {
+  height: 412px;
+  margin-left: -100px;
+  margin-right: 69px;
+  margin-bottom: 3px;
 }

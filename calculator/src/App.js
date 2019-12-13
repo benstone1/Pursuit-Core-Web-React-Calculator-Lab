@@ -12,15 +12,11 @@ class App extends React.Component {
       previousValue: null,
       operation: null,
       waitingForNewValue: false,
-      result: false,
       negative: false
     };
 
     this.state = this.initialState;
   }
-
-  // previousValue = event => {};
-
 
   handleInput = event => {
     let { input } = this.state
@@ -30,9 +26,14 @@ class App extends React.Component {
     });
   };
 
-  allClear = () => {
-    this.setState(this.initialState);
-  };
+  allClear = () => this.setState(this.initialState);
+  clear = () => {
+    this.setState({
+      displayValue: 0,
+      input: ''
+    })
+  }
+
 
   handleOperationButton = e => {
     const { input, waitingForNewValue, displayValue } = this.state;
@@ -54,16 +55,28 @@ class App extends React.Component {
 
   handleMath = () => {
     const { operation, previousValue, input } = this.state
-    if (operation === "x") {
+    if (operation === "÷") {
       this.setState({
-        displayValue: parseFloat(previousValue) * parseFloat(input),
+        displayValue: parseFloat(previousValue) / parseFloat(input),
+        input: '',
+      })
+    } else if (operation === "+") {
+      this.setState({
+        displayValue: parseFloat(previousValue) + parseFloat(input),
         input: '',
       })
     }
   };
+
   showAnswer = e => this.handleMath()
 
-
+  percentage = e => {
+    const { displayValue } = this.state
+    this.setState({
+      displayValue: parseFloat(displayValue) / 100,
+      input: '',
+    })
+  }
 
   //converts between negative and positive
   handleConversion = e => {
@@ -71,11 +84,13 @@ class App extends React.Component {
     if (negative === false) {
       this.setState({
         displayValue: (Math.abs(displayValue) * -1),
+        input: (Math.abs(displayValue) * -1),
         negative: true
       })
     } else {
       this.setState({
         displayValue: (Math.abs(displayValue)),
+        input: (Math.abs(displayValue)),
         negative: false
       })
     }
@@ -105,6 +120,8 @@ class App extends React.Component {
             handleConversion={this.handleConversion}
             allClear={this.allClear}
             showAnswer={this.showAnswer}
+            percentage={this.percentage}
+            clear={this.clear}
           />
         </div>
       </div>
