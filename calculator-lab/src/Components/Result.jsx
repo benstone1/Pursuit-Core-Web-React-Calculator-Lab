@@ -1,6 +1,7 @@
-import React, {Component} from 'react'
+import React from 'react';
 
-class Result extends Components{
+
+class Result extends React.Component{
 
 }
 
