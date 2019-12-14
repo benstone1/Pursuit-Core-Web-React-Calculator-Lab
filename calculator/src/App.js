@@ -12,26 +12,28 @@ class App extends React.Component {
       previousValue: null,
       operation: null,
       waitingForNewValue: false,
-      negative: false
+      negative: false,
+      clear: false,
+      clearType: 'AC'
     };
     this.state = this.initialState;
   }
 
-  componentDidMount() {
-    this.showAnswer = e => {
-      const { input, displayValue } = this.state
-      if (input === '') {
-        this.setState({
-          previousValue: displayValue,
-          input: 0
-        });
-      } else {
-        this.handleMath()
-      }
+  showAnswer = e => {
+    const { input, displayValue } = this.state
+    if (input === '') {
+      this.setState({
+        previousValue: displayValue,
+        input: 0,
+      });
+    } else {
+      this.handleMath()
+      // this.handleOperationButton(e)
     }
-    // console.log('yub');
 
   }
+
+
 
   handleInput = event => {
     let { input } = this.state
@@ -41,32 +43,40 @@ class App extends React.Component {
     });
   };
 
-  allClear = () => this.setState(this.initialState);
-
   clear = () => {
-    this.setState({
+    const { clear } = this.state
+    clear ? this.setState({
       displayValue: 0,
       input: ''
-    })
+    }) : this.setState(this.initialState);
   }
 
 
   handleOperationButton = e => {
-    const { input, waitingForNewValue, displayValue } = this.state;
+    const { input, waitingForNewValue, displayValue, clear } = this.state;
     const value = e.target.value;
     waitingForNewValue ? this.setState({
       operation: value,
       previousValue: parseFloat(displayValue),
-      input: ''
+      input: '',
     }) : this.setState({
       operation: value,
       previousValue: parseFloat(input),
       input: '',
-      waitingForNewValue: true
+      waitingForNewValue: true,
     });
+
+    clear ? this.setState({
+      clear: false,
+      clearType: 'AC'
+    }) : this.setState({
+      clear: true,
+      clearType: 'C'
+    })
   };
 
   handleMath = () => {
+    this.clear()
     const { operation, previousValue, input } = this.state
 
     switch (operation) {
@@ -96,10 +106,11 @@ class App extends React.Component {
         break;
       default:
         this.setState({
-          input: ''
+          input: '',
         })
         break;
     }
+
   };
 
 
@@ -135,7 +146,7 @@ class App extends React.Component {
   handleSubmit = event => event.preventDefault();
 
   render() {
-    const { displayValue, result } = this.state;
+    const { displayValue, result, clearType } = this.state;
 
     console.log(this.state);
 
@@ -154,10 +165,10 @@ class App extends React.Component {
             handleMath={this.handleMath}
             handleSubmit={this.handleSubmit}
             handleConversion={this.handleConversion}
-            allClear={this.allClear}
             showAnswer={this.showAnswer}
             percentage={this.percentage}
             clear={this.clear}
+            clearType={clearType}
           />
         </div>
       </div>
