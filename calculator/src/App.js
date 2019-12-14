@@ -18,8 +18,18 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.showAnswer = e => this.handleMath()
-    console.log('yub');
+    this.showAnswer = e => {
+      const { input, displayValue } = this.state
+      if (input === '') {
+        this.setState({
+          previousValue: displayValue,
+          input: 0
+        });
+      } else {
+        this.handleMath()
+      }
+    }
+    // console.log('yub');
 
   }
 
@@ -27,7 +37,7 @@ class App extends React.Component {
     let { input } = this.state
     this.setState({
       input: parseFloat(input += event.target.innerText),
-      displayValue: input
+      displayValue: parseFloat(input)
     });
   };
 
@@ -44,7 +54,6 @@ class App extends React.Component {
   handleOperationButton = e => {
     const { input, waitingForNewValue, displayValue } = this.state;
     const value = e.target.value;
-
     waitingForNewValue ? this.setState({
       operation: value,
       previousValue: parseFloat(displayValue),
