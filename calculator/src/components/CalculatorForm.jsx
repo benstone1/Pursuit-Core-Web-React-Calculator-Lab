@@ -29,28 +29,28 @@ class CalculatorForm extends Component {
                         <button onClick={this.props.handleInput} className="button col-3">2</button>
                         <button onClick={this.props.handleInput} className="button col-3">3</button>
                         <button onClick={this.props.handleInput} className="button col-6">0</button>
-                        <button className="button col-3" onClick={this.props.handleOperationButton}>.</button>
+                        <button className="button col-3" onClick={this.props.showAnswer}>.</button>
                     </div>
                     <div className='operators'>
                         <button
                             value='÷'
                             className="button col-3 orange"
-                            onClick={this.props.handleOperationButton}
+                            onClick={this.props.showAnswer}
                         > ÷ </button>
                         <button
                             value='x'
                             className="button col-3 orange"
-                            onClick={this.props.handleOperationButton}
+                            onClick={this.props.showAnswer}
                         >x</button>
                         <button
                             value='-'
                             className="button col-3 orange"
-                            onClick={this.props.handleOperationButton}
+                            onClick={this.props.showAnswer}
                         > - </button>
                         <button
                             value='+'
                             className="button col-3 orange"
-                            onClick={this.props.handleOperationButton}
+                            onClick={this.props.showAnswer}
                         >+</button>
                         <button
                             value='='

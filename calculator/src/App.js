@@ -14,21 +14,22 @@ class App extends React.Component {
       waitingForNewValue: false,
       negative: false,
       clear: false,
-      clearType: 'AC'
+      clearType: 'AC',
     };
     this.state = this.initialState;
   }
 
   showAnswer = e => {
     const { input, displayValue } = this.state
+
     if (input === '') {
       this.setState({
         previousValue: displayValue,
         input: 0,
       });
     } else {
+      this.handleOperationButton(e)
       this.handleMath()
-      // this.handleOperationButton(e)
     }
 
   }
@@ -36,11 +37,19 @@ class App extends React.Component {
 
 
   handleInput = event => {
-    let { input } = this.state
+    let { input, waitingForNewValue, displayValue } = this.state
     this.setState({
       input: parseFloat(input += event.target.innerText),
       displayValue: parseFloat(input)
     });
+
+    if (waitingForNewValue) {
+      this.setState({
+        previousValue: displayValue,
+        clear: true,
+        clearType: 'C'
+      })
+    }
   };
 
   clear = () => {
@@ -73,10 +82,11 @@ class App extends React.Component {
       clear: true,
       clearType: 'C'
     })
+
+
   };
 
   handleMath = () => {
-    this.clear()
     const { operation, previousValue, input } = this.state
 
     switch (operation) {
@@ -115,7 +125,6 @@ class App extends React.Component {
 
 
 
-  // showAnswer = e => this.handleMath()
 
   percentage = e => {
     const { displayValue } = this.state
