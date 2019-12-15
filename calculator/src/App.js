@@ -96,18 +96,18 @@ class App extends React.Component {
   };
 
   handleMath = () => {
-    const { operation, previousValue, input } = this.state
+    const { operation, previousValue, input, displayValue } = this.state
 
     switch (operation) {
       case "÷":
         this.setState({
-          displayValue: parseFloat(previousValue) / parseFloat(input),
+          displayValue: parseFloat(previousValue) / parseFloat(displayValue),
           input: '',
         })
         break;
       case "+":
         this.setState({
-          displayValue: parseFloat(previousValue) + parseFloat(input),
+          displayValue: parseFloat(previousValue) + parseFloat(displayValue),
           input: '',
         })
         break;
@@ -132,22 +132,36 @@ class App extends React.Component {
 
   };
 
-  percentage = e => {
-    const { displayValue } = this.state
-    this.setState({
-      displayValue: parseFloat(displayValue) / 100,
-      input: '',
-    })
-  }
-
   //converts between negative and positive
-  handleConversion = e => {
-    const { displayValue } = this.state
-    this.setState({
-      displayValue: (displayValue) * -1,
-      input: (displayValue) * -1,
-    })
+  handleConversionOps = e => {
+    const { displayValue, input, waitingForNewValue } = this.state
 
+
+    switch (e.target.value) {
+      case "%":
+        this.setState({
+          displayValue: parseFloat(displayValue) / 100,
+          input: '',
+        })
+        break;
+      case "±":
+        this.setState({
+          displayValue: (displayValue) * -1,
+          input: (displayValue) * -1,
+        })
+        break;
+      case ".":
+        this.setState({
+          input: displayValue + '.',
+          displayValue: input,
+        })
+        break;
+      default:
+        this.setState({
+          input: '',
+        })
+        break;
+    }
   }
 
   handleSubmit = event => event.preventDefault();
@@ -169,9 +183,8 @@ class App extends React.Component {
           <CalculatorForm
             handleInput={this.handleInput}
             handleSubmit={this.handleSubmit}
-            handleConversion={this.handleConversion}
+            handleConversionOps={this.handleConversionOps}
             showAnswer={this.showAnswer}
-            percentage={this.percentage}
             clear={this.clear}
             clearType={clearType}
           />

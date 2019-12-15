@@ -16,9 +16,9 @@ class CalculatorForm extends Component {
                         <button
                             value='%'
                             className="button col-3"
-                            onClick={this.props.percentage}
+                            onClick={this.props.handleConversionOps}
                         > % </button>
-                        <button className="button col-3" value='±' onClick={this.props.handleConversion}>±</button>
+                        <button className="button col-3" value='±' onClick={this.props.handleConversionOps}>±</button>
                         <button onClick={this.props.handleInput} className="button col-3">7</button>
                         <button onClick={this.props.handleInput} className="button col-3">8</button>
                         <button onClick={this.props.handleInput} className="button col-3">9</button>
@@ -29,7 +29,7 @@ class CalculatorForm extends Component {
                         <button onClick={this.props.handleInput} className="button col-3">2</button>
                         <button onClick={this.props.handleInput} className="button col-3">3</button>
                         <button onClick={this.props.handleInput} className="button col-6">0</button>
-                        <button className="button col-3" value='.' onClick={this.props.handleInput}>.</button>
+                        <button className="button col-3" value='.' onClick={this.props.handleConversionOps}>.</button>
                     </div>
                     <div className='operators'>
                         <button
