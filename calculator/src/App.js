@@ -20,7 +20,7 @@ class App extends React.Component {
   }
 
   showAnswer = e => {
-    const { input, displayValue } = this.state
+    const { input, displayValue, waitingForNewValue } = this.state
 
     if (input === '') {
       this.setState({
@@ -41,23 +41,31 @@ class App extends React.Component {
       displayValue: parseFloat(input)
     });
 
-
     if (waitingForNewValue) {
-      this.setState({
-        previousValue: displayValue,
-        clear: true,
-        clearType: 'C'
-      })
-    } else if (storage !== '') {
       this.setState((prevState) => {
+        return {
+          storage: prevState.previousValue,
+          previousValue: displayValue,
+          clear: true,
+          clearType: 'C'
+        }
+      })
+    }
+
+    this.storage()
+  };
+
+  storage = () => {
+    let storage = this.state.storage
+    if (storage !== '') {
+      this.setState(() => {
         return {
           previousValue: storage,
           storage: ''
         }
       })
     }
-
-  };
+  }
 
   clear = () => {
     const { clear } = this.state
@@ -91,7 +99,6 @@ class App extends React.Component {
       clear: true,
       clearType: 'C'
     })
-
 
   };
 
@@ -135,7 +142,13 @@ class App extends React.Component {
   //converts between negative and positive
   handleConversionOps = e => {
     const { displayValue, input, waitingForNewValue } = this.state
-
+    // if (waitingForNewValue) {
+    //   this.setState((prevState) => {
+    //     return {
+    //       storage: prevState.previousValue
+    //     }
+    //   })
+    // }
 
     switch (e.target.value) {
       case "%":
