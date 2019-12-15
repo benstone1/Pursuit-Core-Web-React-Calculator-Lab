@@ -1,5 +1,7 @@
 import React from 'react';
 import './App.css';
+import Button from './Components/Button'
+import Keypad from './Components/Keypad'
 
 class App extends React.Component {
   constructor(){
@@ -11,11 +13,11 @@ class App extends React.Component {
       waitingForNewValue: false
     }
   }
-  
+
   render(){
     return (
       <div className="App">
-       
+       <Keypad />
       </div>
     )
   }   

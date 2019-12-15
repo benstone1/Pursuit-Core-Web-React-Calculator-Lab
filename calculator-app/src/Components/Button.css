@@ -1,6 +1,6 @@
 .button {
     background-color: #E0E0E6;
-    font-size: 40px;
+    font-size: 140px;
     text-align: center;
     color: #666666;
     border-left: 1px solid #666666;
@@ -9,7 +9,7 @@
     cursor: pointer;
     outline: none;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
-    display: block;
+    display: flex;
   }
   
   button:active {
@@ -19,4 +19,17 @@
   .orange {
     background-color: #EE9B3E;
     color: #fff;
+  }
+
+  .button-wrapper {
+      height: 4em;
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: light;
+      font-size: 1.4em;
+      background-color: #E0E0E6;
+      color:#666666;
+      flex:1;
+      outline: 1px solid #888
   }
