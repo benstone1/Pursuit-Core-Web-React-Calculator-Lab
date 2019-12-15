@@ -15,6 +15,7 @@ class App extends React.Component {
       negative: false,
       clear: false,
       clearType: 'AC',
+      storage: ''
     };
     this.state = this.initialState;
   }
@@ -34,14 +35,13 @@ class App extends React.Component {
 
   }
 
-
-
   handleInput = event => {
-    let { input, waitingForNewValue, displayValue } = this.state
+    let { input, waitingForNewValue, displayValue, storage } = this.state
     this.setState({
       input: parseFloat(input += event.target.innerText),
       displayValue: parseFloat(input)
     });
+
 
     if (waitingForNewValue) {
       this.setState({
@@ -50,16 +50,28 @@ class App extends React.Component {
         clearType: 'C'
       })
     }
+
+    if (storage !== '') {
+      this.setState((prevState) => {
+        return {
+          previousValue: storage,
+          storage: ''
+        }
+      })
+    }
+
   };
 
   clear = () => {
     const { clear } = this.state
-    clear ? this.setState({
-      displayValue: 0,
-      input: ''
+    clear ? this.setState((prevState) => {
+      return {
+        displayValue: 0,
+        input: '',
+        storage: prevState.previousValue
+      }
     }) : this.setState(this.initialState);
   }
-
 
   handleOperationButton = e => {
     const { input, waitingForNewValue, displayValue, clear } = this.state;
@@ -122,9 +134,6 @@ class App extends React.Component {
     }
 
   };
-
-
-
 
   percentage = e => {
     const { displayValue } = this.state
