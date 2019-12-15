@@ -11,10 +11,11 @@ class App extends React.Component {
       waitingForNewValue: false
     }
   }
+  
   render(){
     return (
       <div className="App">
-        
+       
       </div>
     )
   }   
