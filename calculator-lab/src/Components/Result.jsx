@@ -1,8 +1,15 @@
 import React from 'react';
 
+const Result = (props) => {
+    console.log("props", props)
 
-class Result extends React.Component{
+    return (
+<>
 
+</>
+    )
 }
+
+
 
 export default Result;

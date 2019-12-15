@@ -6,7 +6,10 @@ const Buttons = (props) => {
     console.log("props", props)
 return (
 <div className="clac-button">
-<input placeholder={props.displayValue}  />
+  <div className="input">
+<p>{props.displayValue}</p> 
+  </div>
+{/* <input placeholder={props.displayValue}  /> */}
 <div id="row">
 <button value="AC" onClick={props.handleInput}>AC</button>
 <button value="%" onClick={props.handleInput}>%</button>
@@ -36,7 +39,7 @@ return (
 </div>
 
 <div id="row">
-<button value="0" onClick={props.handleInput}>0</button>
+<button className="zero" value="0" onClick={props.handleInput}>0</button>
 <button value="." onClick={props.handleInput}>.</button>
 <button value="=" onClick={props.handleInput} id="orange">=</button>
 </div>
