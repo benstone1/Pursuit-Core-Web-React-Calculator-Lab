@@ -29,7 +29,7 @@ class CalculatorForm extends Component {
                         <button onClick={this.props.handleInput} className="button col-3">2</button>
                         <button onClick={this.props.handleInput} className="button col-3">3</button>
                         <button onClick={this.props.handleInput} className="button col-6">0</button>
-                        <button className="button col-3" onClick={this.props.showAnswer}>.</button>
+                        <button className="button col-3" value='.' onClick={this.props.handleInput}>.</button>
                     </div>
                     <div className='operators'>
                         <button

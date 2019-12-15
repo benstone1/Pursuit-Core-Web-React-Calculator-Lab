@@ -12,7 +12,6 @@ class App extends React.Component {
       previousValue: null,
       operation: null,
       waitingForNewValue: false,
-      negative: false,
       clear: false,
       clearType: 'AC',
       storage: ''
@@ -49,9 +48,7 @@ class App extends React.Component {
         clear: true,
         clearType: 'C'
       })
-    }
-
-    if (storage !== '') {
+    } else if (storage !== '') {
       this.setState((prevState) => {
         return {
           previousValue: storage,
@@ -145,20 +142,12 @@ class App extends React.Component {
 
   //converts between negative and positive
   handleConversion = e => {
-    const { displayValue, negative } = this.state
-    if (negative === false) {
-      this.setState({
-        displayValue: (Math.abs(displayValue) * -1),
-        input: (Math.abs(displayValue) * -1),
-        negative: true
-      })
-    } else {
-      this.setState({
-        displayValue: (Math.abs(displayValue)),
-        input: (Math.abs(displayValue)),
-        negative: false
-      })
-    }
+    const { displayValue } = this.state
+    this.setState({
+      displayValue: (displayValue) * -1,
+      input: (displayValue) * -1,
+    })
+
   }
 
   handleSubmit = event => event.preventDefault();
@@ -179,8 +168,6 @@ class App extends React.Component {
           />
           <CalculatorForm
             handleInput={this.handleInput}
-            handleOperationButton={this.handleOperationButton}
-            handleMath={this.handleMath}
             handleSubmit={this.handleSubmit}
             handleConversion={this.handleConversion}
             showAnswer={this.showAnswer}
