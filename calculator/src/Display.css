@@ -1,0 +1,12 @@
+.displayBar{
+	background-color: black;
+	height: 100px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.white {
+	color: white;
+	font-size: 80px;
+}
