@@ -20,7 +20,7 @@ class App extends React.Component {
   }
 
   showAnswer = e => {
-    const { input, displayValue, waitingForNewValue } = this.state
+    const { input, displayValue, clear } = this.state
 
     if (input === '') {
       this.setState({
@@ -31,11 +31,15 @@ class App extends React.Component {
       this.handleOperationButton(e)
       this.handleMath()
     }
-
+    if (clear === false) {
+      this.setState({
+        storage: ''
+      })
+    }
   }
 
   handleInput = event => {
-    let { input, waitingForNewValue, displayValue, storage } = this.state
+    let { input, waitingForNewValue, displayValue, clear } = this.state
     this.setState({
       input: parseFloat(input += event.target.innerText),
       displayValue: parseFloat(input)
@@ -51,6 +55,15 @@ class App extends React.Component {
         }
       })
     }
+    if (!clear) {
+      this.setState((prevState) => {
+        return {
+          storage: prevState.previousValue,
+        }
+      })
+    }
+
+
 
     this.storage()
   };
@@ -141,14 +154,7 @@ class App extends React.Component {
 
   //converts between negative and positive
   handleConversionOps = e => {
-    const { displayValue, input, waitingForNewValue } = this.state
-    // if (waitingForNewValue) {
-    //   this.setState((prevState) => {
-    //     return {
-    //       storage: prevState.previousValue
-    //     }
-    //   })
-    // }
+    const { displayValue, input } = this.state
 
     switch (e.target.value) {
       case "%":
