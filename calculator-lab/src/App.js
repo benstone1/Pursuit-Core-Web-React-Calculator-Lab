@@ -34,6 +34,8 @@ class App extends React.Component {
             operations,
         } = this
 
+        if (tagName !== "BUTTON") return
+
         if (!isNaN(value)) {
             this.setState({
                 display: display.toString().includes('.') ? display + value : Number(display + value),
@@ -46,6 +48,13 @@ class App extends React.Component {
                 hold: Number(display),
                 display: 0,
             })
+            if (operation) {
+                this.setState({
+                    display: 0,
+                    hold: operation && hold ? operations[operation](hold, display) : display,
+                    history: operation && hold ? history.concat([[hold, operation, display, '=', operations[operation](hold, display)]]) : history,
+                })
+            }
         }
 
         if (nonOps[value]) {

@@ -1,7 +1,7 @@
 import React from 'react';
 import './Calculator.css'
 
-class calculator extends React.Component {
+class History extends React.Component {
     render() {
         return (
             <>
@@ -14,5 +14,5 @@ class calculator extends React.Component {
     }
 }
 
-export default calculator;
+export default History;
 
