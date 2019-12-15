@@ -7,9 +7,14 @@ class GreyOperationButton extends React.Component {
 		super();
 	}
 
+	handleOperation = () => {
+		this.props.onClick();
+	}
+
 	render(){
 		return (
-		<button className='button' className={this.props.className}>{this.props.name}</button>)
+
+		<button className={this.props.className} onClick={this.handleOperation}>{this.props.name}</button>)
 	}
 
 

@@ -7,9 +7,12 @@ class OperationButton extends React.Component {
 		super();
 	}
 
+	handleOperation = () => {
+		this.props.onClick();
+	}
 	render(){
 		return (
-		<button className='orange' className={this.props.className}>{this.props.name}</button>)
+		<button className='orange' className={this.props.className} onClick={this.handleOperation}>{this.props.name}</button>)
 	}
 
 

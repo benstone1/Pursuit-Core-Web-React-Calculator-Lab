@@ -17,7 +17,7 @@ class NumButton extends React.Component {
 
 	render(){
 	return (
-		<button className='button' onClick={this.handleButtonPress}>{this.props.number}</button>)
+		<button className={this.props.className} onClick={this.handleButtonPress}>{this.props.number}</button>)
 	}
 }
 
