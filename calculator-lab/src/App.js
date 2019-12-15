@@ -36,7 +36,7 @@ class App extends React.Component {
 
         if (!isNaN(value)) {
             this.setState({
-                display: Number(display + value),
+                display: display.toString().includes('.') ? display + value : Number(display + value),
             })
         }
 
