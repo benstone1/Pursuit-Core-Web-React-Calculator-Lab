@@ -35,9 +35,11 @@ button:active {
 
 .input{
   justify-content: flex-end;
-  background-color: #696969 ;
+  /* background-color: #696969 ; */
   font-size: x-large;
-  color: white;
+  /* color: white; */
   width: 280px;
   height: 60px;
+  color: #fff;
+  background-color: #333;
 }
