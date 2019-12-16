@@ -10,7 +10,7 @@ class App extends React.Component {
       displayValue: "0",
       previousValue: null,
       operation: null,
-      waitingForNewValue: false,
+      // waitingForNewValue: false,
       displayClear: 'AC',
       neagative:false
     }
@@ -26,12 +26,15 @@ class App extends React.Component {
 
 handleInput = (e) => {
 //  console.log(e.target.value)
-let {displayValue, previousValue, operation, waitingForNewValue} = this.state
+let {displayValue, operation, waitingForNewValue} = this.state
 // let str = " "
+this.setState({
+  displayValue: Number(displayValue += e.target.value),
+})
 if(!operation){
+  // console("hitting function" + e.target.value)
   this.setState({
-   displayValue: Number(displayValue += e.target.value),
-    waitingForNewValue: true,
+    // waitingForNewValue: true,
     displayClear: 'C',
     
   })
@@ -45,6 +48,7 @@ handleOperation = (e) => {
   previousValue: displayValue,
   waitingForNewValue: true,
   displayClear: 'C',
+  displayValue: " "
     })
 }
 
@@ -81,9 +85,7 @@ handleDecimal = (e) => {
   console.log("hello")
 }
 
-
-
-handleEqual = (e) => {
+handleMath=(e) => {
   const {displayValue, previousValue, operation} = this.state
   let counter = 0
 
@@ -92,7 +94,7 @@ if(operation === "/"){
   this.setState({
     displayValue:counter
   })
-}else if(operation === "*"){
+}   else if(operation === "*"){
   counter = Number(previousValue) * Number(displayValue)
   this.setState({
     displayValue:counter
@@ -108,10 +110,17 @@ if(operation === "/"){
     displayValue:counter
   })
 }
-// this.setState({
-//   displayValue:counter
-// })
-// console.log(counter)
+this.setState({
+  displayValue:counter
+})
+console.log(counter)
+
+}
+
+
+handleEqual = (e) => {
+  this.handleMath()
+
 }
 
 handleReset = (e) => {
@@ -129,7 +138,7 @@ handleReset = (e) => {
 
   render(){
   // const { displayValue } = this.state
-  // console.log("state", {displayValue})
+  console.log("state", this.state)
   return (
     <div className="App">
       <Buttons 
