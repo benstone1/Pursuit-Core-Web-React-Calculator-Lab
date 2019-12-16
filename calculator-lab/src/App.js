@@ -13,7 +13,6 @@ class App extends React.Component {
       waitingForNewValue: false,
       displayClear: 'AC',
       neagative:false
-
     }
   }
 
@@ -27,10 +26,16 @@ class App extends React.Component {
 
 handleInput = (e) => {
 //  console.log(e.target.value)
-let str = " "
-this.setState({
-  displayValue: e.target.value
-})
+let {displayValue, previousValue, operation, waitingForNewValue} = this.state
+// let str = " "
+if(!operation){
+  this.setState({
+   displayValue: e.target.value,
+    waitingForNewValue: true,
+    displayClear: 'C',
+    
+  })
+}
 }
 
 handleOperation = (e) => {
@@ -62,6 +67,10 @@ handleNegativePositive = (e) => {
   }
 }
 
+handleDecimal = (e) => {
+  
+}
+
 
 
 handleEqual = (e) => {
@@ -86,7 +95,7 @@ this.setState({
 handleReset = (e) => {
   console.log(e.target.value)
   Buttons.innerText=
-    this.setState =({
+    this.setState ({
       displayValue: "0",
       previousValue: null,
       operation: null,
@@ -110,6 +119,7 @@ handleReset = (e) => {
       displayClear ={this.state.displayClear}
       handleReset = {this.handleReset}
       handleNegativePositive = {this.handleNegativePositive}
+      hanldeDecimal = {this.handleDecimal}
       />
 
 </div>
