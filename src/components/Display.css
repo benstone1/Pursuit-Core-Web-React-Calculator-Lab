@@ -1,0 +1,14 @@
+/*
+Joseph P. Pasaoa
+Display Css | React Calculator Lab
+*/
+
+
+div#display {
+  padding: 15px;
+
+  text-align: right;
+  font-size: 7vw;
+  color: #fff;
+  background-color: #333;
+}
