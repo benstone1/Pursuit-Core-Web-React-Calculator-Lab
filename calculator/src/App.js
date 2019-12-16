@@ -63,13 +63,11 @@ class App extends React.Component {
       })
     }
 
-
-
     this.storage()
   };
 
   storage = () => {
-    let storage = this.state.storage
+    let { storage } = this.state
     if (storage !== '') {
       this.setState(() => {
         return {
@@ -78,6 +76,7 @@ class App extends React.Component {
         }
       })
     }
+
   }
 
   clear = () => {
