@@ -4,6 +4,7 @@ import './Buttons.css';
 
 
 const Buttons = (props) => {
+  const {handleInput, handleOperation, handleEqual, handleDisplayOperation} = props
   
     console.log("props", props)
 return (
@@ -13,37 +14,37 @@ return (
   </div>
 {/* <input placeholder={props.displayValue}  /> */}
 <div id="row">
-<button value="AC" onClick={props.handleInput}>AC</button>
-<button value="%" onClick={props.handleInput}>%</button>
-<button value="+/-" onClick={props.handleInput}>+/-</button>
-<button  value="/" onClick={props.handleOperation} id="orange">/</button>
+<button value="AC" onClick={handleDisplayOperation}>AC</button>
+<button value="%" onClick={handleOperation}>%</button>
+<button value="+/-" onClick={handleDisplayOperation}>+/-</button>
+<button value="/" onClick={handleOperation} id="orange">/</button>
 </div>
 
 <div id="row">
-<button value="7" onClick={props.handleInput}>7</button>
-<button value="8" onClick={props.handleInput}>8</button>
-<button value="9" onClick={props.handleInput}>9</button>
-<button value="*" onClick={props.handleOperation} id="orange">*</button>
+<button value="7" onClick={handleInput}>7</button>
+<button value="8" onClick={handleInput}>8</button>
+<button value="9" onClick={handleInput}>9</button>
+<button value="*" onClick={handleOperation} id="orange">*</button>
 </div>
 
 <div id="row">
-<button value="4" onClick={props.handleInput}>4</button>
-<button value="5" onClick={props.handleInput}>5</button>
-<button value="6" onClick={props.handleInput}>6</button>
-<button value="-" onClick={props.handleOperation} id="orange">-</button>
+<button value="4" onClick={handleInput}>4</button>
+<button value="5" onClick={handleInput}>5</button>
+<button value="6" onClick={handleInput}>6</button>
+<button value="-" onClick={handleOperation} id="orange">-</button>
 </div>
 
 <div id="row">
-<button value="1" onClick={props.handleInput}>1</button>
-<button value="2" onClick={props.handleInput}>2</button>
-<button value="3" onClick={props.handleInput}>3</button>
-<button value="+" onClick={props.handleOperation} id="orange">+</button>
+<button value="1" onClick={handleInput}>1</button>
+<button value="2" onClick={handleInput}>2</button>
+<button value="3" onClick={handleInput}>3</button>
+<button value="+" onClick={handleOperation} id="orange">+</button>
 </div>
 
 <div id="row">
-<button className="zero" value="0" onClick={props.handleInput}>0</button>
-<button value="." onClick={props.handleInput}>.</button>
-<button value="=" onClick={props.handleEqual} id="orange">=</button>
+<button className="zero" value="0" onClick={handleInput}>0</button>
+<button value="." onClick={handleDisplayOperation}>.</button>
+<button value="=" onClick={handleEqual} id="orange">=</button>
 </div>
 
   </div>
