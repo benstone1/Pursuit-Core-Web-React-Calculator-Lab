@@ -17,10 +17,12 @@ class Console extends Component {
   }
 
   render() {
-    const { handleClicks } = this.props;
+    const { displayValue, waitingForNewValue, handleClicks } = this.props;
+    let cOrAc = (displayValue !== '0' && !waitingForNewValue) ? "C" : "AC";
+    
     return (
       <div id="console">
-        <button name="AC" onClick={handleClicks} className="calcButton">AC</button> 
+        <button name={cOrAc} onClick={handleClicks} className="calcButton">{cOrAc}</button> 
         <button name="%" onClick={handleClicks} className="calcButton">%</button>
         <button name="±" onClick={handleClicks} className="calcButton">±</button>
         <button name="÷" onClick={handleClicks} className="calcButton calcButton--orange">÷</button>

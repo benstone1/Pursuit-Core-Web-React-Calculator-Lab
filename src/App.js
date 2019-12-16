@@ -40,7 +40,7 @@ class App extends Component {
     const { displayValue } = this.state;
 
     if (this.getFullLength(displayValue) > 12) {
-      const lastResort = parseFloat(displayValue.toFixed(9));
+      const lastResort = parseFloat(Number(displayValue).toFixed(9));
       this.setState({
           displayValue: this.getFullLength(lastResort) > 12 ? 'ERROR' : lastResort
       });
@@ -69,6 +69,10 @@ class App extends Component {
     // CAN ALWAYS RESET
     if (button === 'AC') {
       return this.setState(this.initialState);
+    }
+
+    if (button === 'C') {
+      return this.setState({ displayValue: '0' });
     }
 
     if (displayValue === 'ERROR') {
@@ -164,13 +168,17 @@ class App extends Component {
   }
 
   render() {
-    const { displayValue } = this.state;
+    const { displayValue, waitingForNewValue } = this.state;
     return (
       <div className="App">
         <Display 
-          displayValue={displayValue} />
+          displayValue={displayValue} 
+          />
         <Console 
-          handleClicks={this.handleClicks} />
+          displayValue={displayValue} 
+          waitingForNewValue={waitingForNewValue} 
+          handleClicks={this.handleClicks} 
+        />
       </div>
     );
   }
