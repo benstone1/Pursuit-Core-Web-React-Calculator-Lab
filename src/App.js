@@ -26,8 +26,29 @@ class App extends Component {
     this.state = this.initialState;
   }
 
+  componentDidUpdate = () => {
+    const { displayValue } = this.state;
+
+    if (this.getFullLength(displayValue) > 12) {
+      const lastResort = parseFloat(displayValue.toFixed(9));
+      this.setState({
+          displayValue: this.getFullLength(lastResort) > 12 ? 'ERROR' : lastResort
+      });
+    }
+
+    if (displayValue === 0) {
+      this.setState({
+          displayValue: 'ERROR'
+      });
+    }
+  }
+
+  getFullLength = (input) => {
+    return input.toString().split('').length;
+  }
+
   isDisplayNotFull = () => {
-    const chars = this.state.displayValue.split('');
+    const chars = this.state.displayValue.toString().split('');
     return chars.filter(char => !isNaN(char)).length < 10;
   }
 
@@ -36,21 +57,29 @@ class App extends Component {
     const button = e.target.name;
     
     if (button === 'AC') {
-      this.setState(this.initialState);
-    } else if (!isNaN(button)) {
-      if (this.isDisplayNotFull()) {                                              // prevent length > 10
+      return this.setState(this.initialState);
+    }
+    
+    if (displayValue !== 'ERROR') {
+      if (!isNaN(button)) {
+        if (this.isDisplayNotFull()) {                                                        // prevent length > 10
+          this.setState({
+              displayValue: displayValue === '0' ? button : displayValue + button  // special zero treatment
+          });
+        }
+      } else if (button === '±') {
         this.setState({
-            displayValue: displayValue === '0' ? button : displayValue + button   // special zero treatment
+            displayValue: displayValue[0] === '-' ? displayValue.slice(1) : '-' + displayValue
+        });
+      } else if (button === '.' && !displayValue.includes('.')) {
+        this.setState({
+            displayValue: displayValue + '.'
+        });
+      } else if (button === '%' && parseFloat(displayValue) !== 0) {
+        this.setState({
+            displayValue: displayValue / 100
         });
       }
-    } else if (button === '±') {
-      this.setState({
-          displayValue: displayValue[0] === '-' ? displayValue.slice(1) : '-' + displayValue
-      });
-    } else if (button === '.' && !displayValue.includes('.')) {
-      this.setState({
-          displayValue: displayValue + '.'
-      });
     }
     
     // console.log(this.countDigits());
