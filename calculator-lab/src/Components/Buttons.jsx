@@ -15,8 +15,8 @@ return (
 {/* <input placeholder={props.displayValue}  /> */}
 <div id="row">
 <button value="AC" onClick={props.handleReset}>{props.displayClear}</button>
-<button value="%" onClick={handleDisplayOperation}>%</button>
-<button value="+/-" onClick={handleDisplayOperation}>+/-</button>
+<button value="%" onClick={props.handlePercent}>%</button>
+<button value="+/-" onClick={props.handleNegativePositive}>+/-</button>
 <button value="/" onClick={handleOperation} id="orange">/</button>
 </div>
 
