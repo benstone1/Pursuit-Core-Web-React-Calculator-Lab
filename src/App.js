@@ -21,8 +21,6 @@ class App extends Component {
       previousValue: null,
       operation: null,
       waitingForNewValue: false
-      // operationOnDeck: "",
-      //     activeEntry: 0
     };
     this.state = this.initialState;
     this.ops = {
@@ -31,9 +29,6 @@ class App extends Component {
       "x": (a, b) => a * b,
       "÷": (a, b) => b !== 0 ? a / b : 'ERROR'
     };
-    this.executes = {
-
-    }
   }
 
   componentDidUpdate = () => {
@@ -178,11 +173,12 @@ class App extends Component {
   }
 
   render() {
-    const { displayValue, waitingForNewValue } = this.state;
+    const { displayValue, operation, waitingForNewValue } = this.state;
     return (
       <div className="App">
         <Display 
           displayValue={displayValue} 
+          operation={operation} 
           />
         <Console 
           displayValue={displayValue} 
