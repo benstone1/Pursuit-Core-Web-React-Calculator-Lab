@@ -39,10 +39,11 @@ class App extends Component {
   componentDidUpdate = () => {
     const { displayValue } = this.state;
 
-    if (this.getFullLength(displayValue) > 12) {
+    if (this.getCurrTotalLength(displayValue) > 12 || this.getCurrDigitLength(displayValue) > 10) {
       const lastResort = parseFloat(Number(displayValue).toFixed(9));
+      const fixed = !(this.getCurrTotalLength(lastResort) > 12) && !(this.getCurrDigitLength(lastResort) > 10);
       this.setState({
-          displayValue: this.getFullLength(lastResort) > 12 ? 'ERROR' : lastResort
+          displayValue: fixed ? lastResort : 'ERROR'
       });
     }
 
@@ -53,13 +54,13 @@ class App extends Component {
     }
   }
 
-  getFullLength = (input) => {
+  getCurrTotalLength = (input) => {
     return input.toString().split('').length;
   }
 
-  isDisplayNotFull = () => {
-    const chars = this.state.displayValue.toString().split('');
-    return chars.filter(char => !isNaN(char)).length < 10;
+  getCurrDigitLength = (input) => {
+    const chars = input.toString().split('');
+    return chars.filter(char => !isNaN(char)).length;
   }
 
   handleClicks = (e) => {
@@ -133,7 +134,7 @@ class App extends Component {
       }
       // //
 
-      if (this.isDisplayNotFull()) {                                              // prevent length > 10
+      if (this.getCurrDigitLength(displayValue) < 10) {                           // prevent length > 10
         return this.setState({
             displayValue: displayValue === '0' ? button : displayValue + button   // special zero treatment
         });
@@ -142,7 +143,7 @@ class App extends Component {
     // // //
     
     // INPUT POSITIVE/NEGATIVE
-    if (button === '±') {
+    if (button === '±' && displayValue !== '0') {
       return this.setState({
           displayValue: displayValue[0] === '-' ? displayValue.slice(1) : '-' + displayValue
       });
@@ -150,10 +151,19 @@ class App extends Component {
     // // //
     
     // INPUT DECIMAL POINT
-    if (button === '.' && !displayValue.includes('.')) {
-      return this.setState({
-          displayValue: displayValue + '.'
-      });
+    if (button === '.') {
+      if (waitingForNewValue) {
+        return this.setState({
+            displayValue: '0.',
+            waitingForNewValue: false
+        });
+      }
+      // // //
+      if (!displayValue.includes('.')) {
+        return this.setState({
+            displayValue: displayValue + '.'
+        });
+      }
     }
     // // //
 
