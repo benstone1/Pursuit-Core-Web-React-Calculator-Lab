@@ -6,7 +6,7 @@ import './Buttons.css';
 const Buttons = (props) => {
   const {handleInput, handleOperation, handleEqual, handleDisplayOperation} = props
   
-    console.log("props", props)
+    // console.log("props", props)
 return (
 <div className="clac-button">
   <div className="input">
@@ -14,8 +14,8 @@ return (
   </div>
 {/* <input placeholder={props.displayValue}  /> */}
 <div id="row">
-<button value="AC" onClick={handleDisplayOperation}>AC</button>
-<button value="%" onClick={handleOperation}>%</button>
+<button value="AC" onClick={props.handleReset}>{props.displayClear}</button>
+<button value="%" onClick={handleDisplayOperation}>%</button>
 <button value="+/-" onClick={handleDisplayOperation}>+/-</button>
 <button value="/" onClick={handleOperation} id="orange">/</button>
 </div>

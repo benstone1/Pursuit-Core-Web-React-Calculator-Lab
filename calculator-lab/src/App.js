@@ -11,7 +11,7 @@ class App extends React.Component {
       previousValue: null,
       operation: null,
       waitingForNewValue: false,
-      displayOperation: null
+      displayClear: 'AC'
     }
   }
 
@@ -32,33 +32,60 @@ this.setState({
 
 handleOperation = (e) => {
   const {displayValue} = this.state
-    this.setState({
+  this.setState({
   operation: e.target.value,
   previousValue: displayValue,
-  waitingForNewValue: true
+  waitingForNewValue: true,
+  displayClear: 'C'
     })
 }
 
 handleDisplayOperation =(e) => {
+const {displayValue, operation} = this.state
 console.log(e.target.value)
+
+let counter = 0;
+
+if(operation === "%"){
+  counter =  parseInt(displayValue) * 100
+}
+this.setState({
+  displayValue:counter
+})
 }
 
 handleEqual = (e) => {
-  const {displayValue, previousValue, operation, waitingForNewValue} = this.state
-  let counter;
+  const {displayValue, previousValue, operation} = this.state
+  let counter = 0
 // let result = parseInt(previousValue) + `${operation}` + parseInt(displayValue);
+// if(displayValue && operation && previousValue){
 if(operation === "/"){
   counter = parseInt(previousValue) / parseInt(displayValue)
 }else if(operation === "*"){
-counter = parseInt(previousValue) * parseInt(displayValue)
+  counter = parseInt(previousValue) * parseInt(displayValue)
 }else if(operation === ""){
   counter = parseInt(previousValue) - parseInt(displayValue)
 }else if(operation === "+"){
-  counter = parseInt(previousValue) + parseInt(displayValue)
-}else if(operation === "%"){
-  counter = parseInt(previousValue) * 100
+  counter =  parseInt(previousValue) + parseInt(displayValue)
 }
+// }
+this.setState({
+  displayValue:counter
+})
 console.log(counter)
+}
+
+handleReset = (e) => {
+  console.log(e.target.value)
+  Buttons.innerText=
+    this.setState =({
+      displayValue: "0",
+      previousValue: null,
+      operation: null,
+      waitingForNewValue: false,
+      displayClear: 'AC'
+    })
+  
 }
 
   render(){
@@ -72,6 +99,8 @@ console.log(counter)
       handleOperation = {this.handleOperation}
       handleEqual = {this.handleEqual}
       handleDisplayOperation = {this.handleDisplayOperation}
+      displayClear ={this.state.displayClear}
+      handleReset = {this.handleReset}
       />
 
 </div>
