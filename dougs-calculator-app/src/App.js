@@ -46,7 +46,6 @@ class App extends Component {
   handlePercent = () => {
     console.log("Percent fired")
     let currentNumber = parseInt(this.state.displayValue)
-    let previousValue = parseInt(this.state.previousValue)
     this.setState({
       displayValue: currentNumber / 100
     })
@@ -77,8 +76,8 @@ class App extends Component {
   }
 
   handleEqual = () => {
-    let currentNumber = parseInt(this.state.displayValue)
-    let previousValue = parseInt(this.state.previousValue)
+    let currentNumber = parseFloat(this.state.displayValue)
+    let previousValue = parseFloat(this.state.previousValue)
     let operation = this.state.operation
     let answer
     if (operation === "divide") {
