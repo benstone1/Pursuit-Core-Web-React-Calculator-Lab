@@ -71,13 +71,24 @@ table {
 
 
 /* MAIN STYLE */
-html, body, .App, div#grid-base {
+html, body {
   height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
 }
 
-div#grid-base {
+.App {
+	width: 50vw;
+	height: 50vh;
+	margin: 0px auto;
+
 	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 2fr 5fr;
+
+	font-family: system-ui;
+	font-weight: normal;
 }
+
+
