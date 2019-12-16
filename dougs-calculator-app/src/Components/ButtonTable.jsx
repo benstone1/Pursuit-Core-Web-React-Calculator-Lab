@@ -11,7 +11,7 @@ const ButtonTable = (props) => {
              )}
 
             <button className="button standard" value="%" onClick={props.handlePercent}>%</button>
-            <button className="button standard" value="plus-minus">±</button>
+            <button className="button standard" value="plus-minus" onClick={props.handlePlusMinus}>±</button>
             <button className="button standard orange" value="divide" onClick={props.handleOperator}>÷</button>
             <button className="button standard" value="7" onClick={props.handleNumberClick}>7</button>
             <button className="button standard" value="8" onClick={props.handleNumberClick}>8</button>

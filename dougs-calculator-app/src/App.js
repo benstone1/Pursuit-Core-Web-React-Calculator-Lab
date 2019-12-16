@@ -96,6 +96,21 @@ class App extends Component {
     })
   }
 
+  handlePlusMinus = () => {
+    let displayValue = parseFloat(this.state.displayValue)
+    if (Math.sign(displayValue) === 1) {
+      this.setState({
+        displayValue: -Math.abs(displayValue)
+      })
+    } else if (Math.sign(displayValue) === -1) {
+      this.setState({
+        displayValue: Math.abs(displayValue)
+      })
+    } else if (Math.sign(displayValue) === 0) {
+
+    }
+  }
+
   render() {
     return (
       <div className="App">
@@ -110,6 +125,7 @@ class App extends Component {
         handleEqual={this.handleEqual}
         handlePercent={this.handlePercent}
         handleDecimal={this.handleDecimal}
+        handlePlusMinus={this.handlePlusMinus}
         />
       </div>
     );
