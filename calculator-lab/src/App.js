@@ -30,7 +30,7 @@ let {displayValue, previousValue, operation, waitingForNewValue} = this.state
 // let str = " "
 if(!operation){
   this.setState({
-   displayValue: e.target.value,
+   displayValue: Number(displayValue += e.target.value),
     waitingForNewValue: true,
     displayClear: 'C',
     
@@ -68,8 +68,8 @@ handleNegativePositive = (e) => {
 }
 
 handleDecimal = (e) => {
-  const {displayValue, operation, previousValue} = this.state
-  if (displayValue.includes(".")){
+  const {displayValue} = this.state
+  if (displayValue.toString().includes(".")){
     this.setState({
       displayValue: displayValue,
     })
@@ -78,6 +78,7 @@ handleDecimal = (e) => {
       displayValue: displayValue + "."
     })
   }
+  console.log("hello")
 }
 
 
@@ -88,16 +89,28 @@ handleEqual = (e) => {
 
 if(operation === "/"){
   counter = Number(previousValue) / Number(displayValue)
+  this.setState({
+    displayValue:counter
+  })
 }else if(operation === "*"){
   counter = Number(previousValue) * Number(displayValue)
-}else if(operation === ""){
+  this.setState({
+    displayValue:counter
+  })
+}else if(operation === "-"){
   counter = Number(previousValue) - Number(displayValue)
+  this.setState({
+    displayValue:counter
+  })
 }else if(operation === "+"){
   counter =  Number(previousValue) + Number(displayValue)
+  this.setState({
+    displayValue:counter
+  })
 }
-this.setState({
-  displayValue:counter
-})
+// this.setState({
+//   displayValue:counter
+// })
 // console.log(counter)
 }
 
@@ -128,7 +141,7 @@ handleReset = (e) => {
       displayClear ={this.state.displayClear}
       handleReset = {this.handleReset}
       handleNegativePositive = {this.handleNegativePositive}
-      hanldeDecimal = {this.handleDecimal}
+      handleDecimal = {this.handleDecimal}
       />
 
 </div>

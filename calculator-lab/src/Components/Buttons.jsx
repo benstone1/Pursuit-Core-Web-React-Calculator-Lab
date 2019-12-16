@@ -4,7 +4,7 @@ import './Buttons.css';
 
 
 const Buttons = (props) => {
-  const {handleInput, handleOperation, handleEqual, handleDisplayOperation} = props
+  const {handleInput, handleOperation, handleEqual} = props
   
     // console.log("props", props)
 return (
@@ -43,7 +43,7 @@ return (
 
 <div id="row">
 <button className="zero" value="0" onClick={handleInput}>0</button>
-<button value="." onClick={handleDisplayOperation}>.</button>
+<button value="." onClick={props.handleDecimal}>.</button>
 <button value="=" onClick={handleEqual} id="orange">=</button>
 </div>
 
