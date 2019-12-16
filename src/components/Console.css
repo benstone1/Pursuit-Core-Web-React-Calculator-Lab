@@ -1,0 +1,39 @@
+/*
+Joseph P. Pasaoa
+Console Css | React Calculator Lab
+*/
+
+
+div#console {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+}
+
+.calcButton {
+  background-color: #e0e0e6;
+  font-size: 40px;
+  text-align: center;
+  color: #666666;
+  border-left: 1px solid #666666;
+  border-bottom: 1px solid #666666;
+  user-select: none;
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  display: block;
+}
+
+button:active {
+  color: #222;
+  box-shadow: inset 0px 0px 80px 0px rgba(0,0,0,0.25);
+}
+
+.calcButton--orange {
+  background-color: #ee9b3e;
+  color: #fff;
+}
+
+.calcButton--2wide {
+  grid-column: span 2;
+}
