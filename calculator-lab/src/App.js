@@ -68,7 +68,16 @@ handleNegativePositive = (e) => {
 }
 
 handleDecimal = (e) => {
-  
+  const {displayValue, operation, previousValue} = this.state
+  if (displayValue.includes(".")){
+    this.setState({
+      displayValue: displayValue,
+    })
+  }else{
+    this.setState({
+      displayValue: displayValue + "."
+    })
+  }
 }
 
 
