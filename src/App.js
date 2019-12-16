@@ -34,6 +34,7 @@ class App extends Component {
   componentDidUpdate = () => {
     const { displayValue } = this.state;
 
+    /* CHECKS AGAINST NUM LENGTH BEING TOO LARGE */
     if (this.getCurrTotalLength(displayValue) > 12 || this.getCurrDigitLength(displayValue) > 10) {
       const lastResort = parseFloat(Number(displayValue).toFixed(9));
       const fixed = !(this.getCurrTotalLength(lastResort) > 12) && !(this.getCurrDigitLength(lastResort) > 10);
@@ -42,7 +43,8 @@ class App extends Component {
       });
     }
 
-    if (displayValue === 0) {     // for those really small numbers that js rounds to Number 0
+    /* CHECKS AGAINST REALLY SMALL NUMS JS ROUND TO 0 */
+    if (displayValue === 0) {
       this.setState({
           displayValue: 'ERROR'
       });
@@ -62,21 +64,22 @@ class App extends Component {
     const { displayValue, residualValue, previousValue, operation, waitingForNewValue } = this.state;
     const button = e.target.name;
 
-    // CAN ALWAYS RESET
+    /* AC: ALL CLEAR (ALWAYS AVAILABLE) */
     if (button === 'AC') {
       return this.setState(this.initialState);
     }
 
+    /* C: CLEAR */
     if (button === 'C') {
       return this.setState({ displayValue: '0' });
     }
 
+    /* 'ERROR' HALT */
     if (displayValue === 'ERROR') {
       return;
     }
-    // // //
     
-    // INPUT EQUALS
+    /* = OPERATION */
     if (button === '=') {
       if (previousValue !== null && operation) {
         const result = this.ops[operation](previousValue, residualValue || parseFloat(displayValue));
@@ -88,9 +91,8 @@ class App extends Component {
         });
       }
     }
-    // // //
 
-    // INPUT OPERATION
+    /* +|-|x|÷ OPERATIONS */
     if (this.ops[button]) {
       this.setState({
         residualValue: null
@@ -116,9 +118,8 @@ class App extends Component {
           waitingForNewValue: true
       });
     }
-    // // //
 
-    // INPUT NUMBER
+    /* 0-9 */
     if (!isNaN(button)) {
       if (waitingForNewValue) {
         return this.setState({
@@ -128,24 +129,21 @@ class App extends Component {
         });
       }
       // //
-
       if (this.getCurrDigitLength(displayValue) < 10) {                           // prevent length > 10
         return this.setState({
             displayValue: displayValue === '0' ? button : displayValue + button   // special zero treatment
         });
       }
     }
-    // // //
     
-    // INPUT POSITIVE/NEGATIVE
+    /* ± POSNEG KEY */
     if (button === '±' && displayValue !== '0') {
       return this.setState({
           displayValue: displayValue[0] === '-' ? displayValue.slice(1) : '-' + displayValue
       });
     }
-    // // //
     
-    // INPUT DECIMAL POINT
+    /* . DECIMAL POINT KEY */
     if (button === '.') {
       if (waitingForNewValue) {
         return this.setState({
@@ -153,23 +151,21 @@ class App extends Component {
             waitingForNewValue: false
         });
       }
-      // // //
+      // //
       if (!displayValue.includes('.')) {
         return this.setState({
             displayValue: displayValue + '.'
         });
       }
     }
-    // // //
 
-    // INPUT PERCENTAGE
+    /* % PERCENTAGE KEY */
     if (button === '%' && parseFloat(displayValue) !== 0) {
       return this.setState({
           displayValue: displayValue / 100
       });
     }
 
-  // // // //
   }
 
   render() {
