@@ -13,6 +13,12 @@ class App extends React.Component {
     }
   }
 
+  handleName = (e) => {
+    this.setState({
+      todoName: e.target.value
+    })
+  }
+  
   render() {
 
 
