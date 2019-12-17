@@ -8,7 +8,7 @@ class App extends React.Component {
     super();
     this.initialState = {
       displayValue: 0,
-      input: '',
+      input: 0,
       previousValue: null,
       operation: null,
       waitingForNewValue: false,
@@ -169,10 +169,12 @@ class App extends React.Component {
         })
         break;
       case ".":
-        this.setState({
-          input: displayValue + '.',
-          displayValue: input,
-        })
+        if (!displayValue.toString().includes('.')) {
+          this.setState({
+            input: displayValue + '.',
+            displayValue: input,
+          })
+        }
         break;
       default:
         this.setState({
