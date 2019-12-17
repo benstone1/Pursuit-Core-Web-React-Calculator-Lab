@@ -2,7 +2,6 @@ import React from 'react'
 import './Buttons.css';
 
 
-
 const Buttons = (props) => {
   const {handleInput, handleOperation, handleEqual} = props
   
@@ -16,8 +15,8 @@ return (
 <div id="row">
 <button value="AC" onClick={props.handleReset}>{props.displayClear}</button>
 <button value="%" onClick={props.handlePercent}>%</button>
-<button value="+/-" onClick={props.handleNegativePositive}>+/-</button>
-<button value="/" onClick={handleOperation} id="orange">/</button>
+<button value="+/-" onClick={props.handleNegativePositive}>±</button>
+<button value="/" onClick={handleOperation} id="orange">÷</button>
 </div>
 
 <div id="row">

@@ -82,7 +82,7 @@ handleDecimal = (e) => {
       displayValue: displayValue + "."
     })
   }
-  console.log("hello")
+  // console.log("hello")
 }
 
 handleMath=(e) => {
@@ -114,13 +114,10 @@ this.setState({
   displayValue:counter
 })
 console.log(counter)
-
 }
-
 
 handleEqual = (e) => {
   this.handleMath()
-
 }
 
 handleReset = (e) => {
