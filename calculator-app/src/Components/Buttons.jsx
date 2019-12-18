@@ -27,7 +27,7 @@ const Buttons = (props) => {
       <button value="4" onClick={handleInput} >4</button>
       <button value="5" onClick={handleInput} >5</button>
       <button value="6" onClick={handleInput}>6</button>
-      <button value="-" onClick={handleInput} className="orange">-</button>
+      <button value="-" onClick={handleOperation} className="orange">-</button>
       </div>
 
       <div className="row">

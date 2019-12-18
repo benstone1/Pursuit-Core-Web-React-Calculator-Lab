@@ -9,8 +9,7 @@ class App extends React.Component {
         displayValue: '0',
         displayClear: 'AC',
         previousValue: null,
-        operation: null,
-        waitingForNewValue: false
+        operation: null
       }
   }
 
@@ -19,7 +18,7 @@ class App extends React.Component {
    let secondNum = event.target.value
    let newValue = `${displayValue}${secondNum}` 
     if (displayValue.includes('.')) {
-      this.setState({
+      this.setState({ 
         displayValue: newValue
       })
     } else {
@@ -28,16 +27,17 @@ class App extends React.Component {
     })
    }
   }
-
+ 
   handleOperation = (event) => {
     const {displayValue} = this.state
     this.setState({
       operation: event.target.value,
       displayClear: 'C',
       previousValue: displayValue,
-      waitingForNewValue: true
+      displayValue: ''
     })
   }
+  
 
   handleClear = (event) => {
     let btn = event.target.value 
@@ -57,10 +57,8 @@ class App extends React.Component {
   }
 
   handleDecimalPoint = (event) => {
-    let btn = event.target.value 
     const {displayValue} = this.state 
     let newValue = displayValue + '.'
-    if (btn === ".") {
       if (displayValue.includes('.')){
         this.setState({
           displayValue: displayValue
@@ -70,7 +68,6 @@ class App extends React.Component {
         displayValue: newValue
       })
     }
-  }
 }
 
   handleSign = (event) => {
@@ -88,30 +85,56 @@ class App extends React.Component {
     }
   }
 
-  getPercentage = () => {
-    console.log('getting percentage')
+  displayResult = (num) => {
+    this.setState({
+      displayValue: num
+    })
   }
 
-  add = () => {
-    console.log('adding')
+  getPercentage = (num) => {
+    let result = num/100
+    this.displayResult(result) 
   }
 
-  subtract = () => {
-    console.log('subtracting')
+  add = (num1, num2) => {
+    let result = num1 + num2
+    this.displayResult(result)
   }
 
-  multiply = () => {
-    console.log('multiplying')
+  subtract = (num1, num2) => {
+    let result = num1 - num2
+    this.displayResult(result)
   }
 
-  divide = () => {
-    console.log('dividing')
+  multiply = (num1, num2) => {
+    let result = num1 * num2
+    this.displayResult(result)
   }
+
+  divide = (num1, num2) => {
+    let result = num1/num2
+    this.displayResult(result)
+  }
+
 
   handleEqual = (event) => {
-    console.log('getting result')
-    //const {displayValue, previousValue, operation, waitingForNewValue} = this.state
-    //let counter = 0;
+    const {displayValue, previousValue, operation} = this.state
+    let firstNum = Number(previousValue)
+    let secondNum = Number(displayValue)
+    if (operation === '%') {
+      this.getPercentage(displayValue)
+    } else if (operation === '+') {
+      this.add(firstNum, secondNum)
+    } else if (operation === '-') {
+      this.subtract(firstNum, secondNum)
+    } else if (operation === 'X') {
+      this.multiply(firstNum, secondNum)
+    } else if (operation === '/') {
+      this.divide(firstNum, secondNum)
+    }
+    this.setState({
+      displayClear: 'AC'
+    })
   }
 
   render() {
