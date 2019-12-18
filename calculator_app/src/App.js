@@ -1,33 +1,32 @@
 import React from 'react';
-import CalculatorForm from './Components/CalculatorForm'
+import Calculator from './Components/Calculator'
 import './App.css';
+// import CalculatorForm from './Components/CalculatorForm';
 
 class App extends React.Component {
   constructor() {
     super()
     this.state = {
-       inputBar: ''
+      display: 0,
+       buttonValue: ''
+      
     }
   }
+    
+  // handleButtonsClick = (buttonValue) => {
+  //   // const {buttonValue} = this.state
+  //   this.setState({
+  //     display: buttonValue,
+  //   })
+  //   console.log('the button has been clicked', buttonValue)
+  // }
 
-  handleSubmitForm = (e) => {
-    e.preventDefault()
-    console.log('the form was submitted')
-  }
+  
 
-  handleInputChange = (e) => {
-    this.setState({
-      inputBar: e.target.value
-     
-    })
-     console.log('input bar', e.target.value)
-  }
   render() {
     return (
       <div className="App">
-        <CalculatorForm
-          handleInputChange={this.handleInputChange}
-          handleSubmitForm={this.handleSubmitForm}
+        <Calculator
         />
       </div>
     );
