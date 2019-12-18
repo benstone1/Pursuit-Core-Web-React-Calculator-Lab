@@ -8,9 +8,11 @@ const Calculator = (props) => {
             <input type="text" class="calculator-screen" value={props.displayValue} />
 
             <div className="calculator-keys">
-            <button value='AC' className="button all-clear">AC</button>
-            <button value='%' className="button percent">%</button>
-            <button value='±' className="button postive-negative">±</button>
+            <button value='AC' id="all-clear" className="button all-clear" onClick={props.handleAllClear}>AC</button>
+            <button value='C' id="clear" className="button clear" onClick={props.handleClear}>C</button>
+
+            <button value='%' className="button percent" onClick={props.handlePercent}>%</button>
+            <button value='±' className="button postive-negative" onClick={props.handlePlusMinus}>±</button>
             <button value='÷' className="button operator-div orange" onClick={props.handleOperationClick}>÷</button>
 
             <button value='7' className="button key-7" onClick={props.handleKeyClick}>7</button>

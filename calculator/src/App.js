@@ -10,7 +10,9 @@ class App extends React.Component {
       previousValue: null,
       operation: null,
       waitingForNewValue: false,
-      calculationDone: false
+      calculationDone: false,
+      negativeNum: false,
+      postiveNum: true
     }
   }
 
@@ -48,7 +50,34 @@ class App extends React.Component {
       previousValue: lastNumbers,
       waitingForNewValue: checkOperator,
       calculationDone: false
+    })
+  }
 
+  handlePlusMinus = () => {
+    const { displayValue } = this.state
+    let postiveOrNegative = displayValue.includes('-')
+    let action = null
+    
+    if (postiveOrNegative) {
+      action = displayValue.slice(1)
+      console.log("Negative there????", action);
+
+    } else {
+      action = '-' + displayValue
+      console.log("Negative there?", action);
+    }
+    this.setState({
+      displayValue: action
+    })
+  }
+
+  handlePercent = () => {
+    const { displayValue } = this.state
+
+    let percentNumber = `${Number(displayValue / 100)}`
+
+    this.setState({
+      displayValue: percentNumber
     })
   }
 
@@ -59,6 +88,9 @@ class App extends React.Component {
 
     if (!operation) {
       checkOperator = true
+      document.getElementById("all-clear").style.visibility = "Hidden";
+      document.getElementById("clear").style.visibility = "visible";
+
     }
 
     this.setState({
@@ -72,6 +104,9 @@ class App extends React.Component {
 
     //FINISHED This thought: decide how to bring the operator here. it's being set to null after a 2nd set of numbers is being clicked
     let result = displayValue
+    let lastNumber = previousValue
+    document.getElementById("all-clear").style.visibility = "visible";
+    document.getElementById("clear").style.visibility = "hidden";
 
     if (operation === "+") {
       result = `${Number(displayValue) + Number(previousValue)}`
@@ -88,10 +123,26 @@ class App extends React.Component {
 
     this.setState({
       displayValue: result,
-      previousValue: null,
+      previousValue: result,
       operation: null,
       waitingForNewValue: false,
       calculationDone: true
+    })
+  }
+
+handleClear = () => {
+  this.setState({
+    displayValue: "0",
+  })
+}
+
+  handleAllClear = () => {
+    this.setState({
+      displayValue: "0",
+      previousValue: null,
+      operation: null,
+      waitingForNewValue: false,
+      calculationDone: false
     })
   }
 
@@ -108,7 +159,11 @@ class App extends React.Component {
           waitingForNewValue={waitingForNewValue}
           handleKeyClick={this.handleKeyClick}
           handleOperationClick={this.handleOperationClick}
-          handleEqualClick={this.handleEqualClick} />
+          handleEqualClick={this.handleEqualClick}
+          handlePlusMinus={this.handlePlusMinus}
+          handlePercent={this.handlePercent}
+          handleClear={this.handleClear}
+          handleAllClear={this.handleAllClear} />
       </div>
     );
   }

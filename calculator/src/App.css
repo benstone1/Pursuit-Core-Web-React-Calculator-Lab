@@ -97,7 +97,19 @@ button:hover {
 .key-0 {
   grid-column-start: 1;
   grid-column-end: 3;
+}
 
+.all-clear {
+  grid-column-start: 1;
+  grid-row-start: 1;
+  visibility: visible;
+
+}
+
+.clear {
+  grid-column-start: 1;
+  grid-row-start: 1;
+  visibility: hidden;
 }
 
 .decimal {
