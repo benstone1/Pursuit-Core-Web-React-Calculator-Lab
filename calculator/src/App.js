@@ -170,19 +170,3 @@ handleClear = () => {
 }
 
 export default App;
-
-
-
-
-// this.operations = {
-//   "+": (x, y) => Number(x) + Number(y),
-//   "-": (x, y) => Number(x) - Number(y),
-//   "x": (x, y) => Number(x) * Number(y),
-//   "÷": (x, y) => Number(x) / Number(y),
-// }
-// this.nonOps = {
-//   'AC': (display) => {return {display: 0, operation: null, hold: null}},
-//   '%': (display) => {return {display: Number(display) / 100}},
-//   '±': (display) => {return {display: Number(display) * -1}},
-//   '.': (display) => {return {display: display.toString().includes('.') ? display : display + '.'}},
-// }
