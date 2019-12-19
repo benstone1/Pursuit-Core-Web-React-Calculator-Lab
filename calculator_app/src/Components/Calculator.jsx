@@ -1,68 +1,44 @@
-import React, { Component } from 'react';
-import Buttons from './Buttons';
-import ButtonsDisplay from './ButtonsDisplay';
-// import CalculatorForm from './Components/CalculatorForm';
+import React from 'react';
 
-class Calculator extends Component {
-    constructor(props) {
-        super(props) 
-        this.state = {
-            display: 0,
-            buttonValue: ''
-        }
-    }
-
-    handleClick = (e) => {
-        this.setState({
-            display: e.target.value,
-            buttonValue: e.target.value
-
-        
-        })
-        console.log('click', e.target.value)
-    }
-
-    render() {
-        const {display} = this.state
-        return (
-            <div className='calculator'>
-                <ButtonsDisplay
-                    display={display.name}
-                    handleClick={this.handleClick}
-                />
-                <div className='wrapper'>
-                    <Buttons name='AC' value={display}  handleClick={this.handleClick}/>
-                    <Buttons name='%'/>
-                    <Buttons name='+-'/>
-                    <Buttons name='/'/>
-                </div>
-                <div className='wrapper'>
-                    <Buttons name='7'/>
-                    <Buttons name='8'/>
-                    <Buttons name='9'/>
-                    <Buttons name='*'/>
-                </div>
-                <div className='wrapper'>
-                    <Buttons name='4'/>
-                    <Buttons name='5'/>
-                    <Buttons name='6'/>
-                    <Buttons name='-'/>
-                </div>
-                <div className='wrapper'>
-                    <Buttons name='1'/>
-                    <Buttons name='2'/>
-                    <Buttons name='3'/>
-                    <Buttons name='+'/>
-                </div>
-                <div className='wrapper'>
-                    <Buttons name='0'/>
-                    <Buttons name='.'/>
-                    <Buttons name='='/>
-                </div>
-
+const Calculator = (props) => {
+    return (
+        <div className='calculator'>
+            <div className='display'>
+                 {props.display}
             </div>
-        )
-    }
+           <div className='wrapper'>
+             <button className='button' name='AC' onClick={props.handleACButton} value={props.name}>AC</button>
+                <button className='button' name='%' onClick={props.handlePercentage} value={props.display}>%</button>
+                <button className= 'button' name='+-' onClick={props.handleNegAndPos} value={props.display}>+-</button>
+                <button className='orange' name='/' onClick={props.handleOperation} value={props.display}>/</button>
+            </div>
+                <div className='wrapper'>
+                <button className='button' name='7' onClick={props.handleNumbers} value={props.display}>7</button>
+                <button className='button' name='8' onClick={props.handleNumbers} value={props.display}>8</button>
+                <button className='button' name='9' onClick={props.handleNumbers} value={props.display}>9</button>
+                <button className='orange' name='*' onClick={props.handleOperation} value={props.display}>*</button>
+            </div>
+            <div className='wrapper'>
+                <button className='button' name='4' onClick={props.handleNumbers} value={props.display}>4</button>
+                <button className='button' name='5' onClick={props.handleNumbers} value={props.display}>5</button>
+                <button className='button' name='6' onClick={props.handleNumbers} value={props.display}>6</button>
+                <button className='orange' name='-' onClick={props.handleOperation} value={props.display}>-</button>
+            </div>
+            <div className='wrapper'>
+                <button className='button' name='1' onClick={props.handleNumbers} value={props.display}>1</button>
+                <button className='button' name='2' onClick={props.handleNumbers} value={props.display}>2</button>
+                <button className='button' name='3' onClick={props.handleNumbers} value={props.display}>3</button>
+                <button className='orange' name='+' onClick={props.handleOperation} value={props.display}>+</button>
+            </div>
+            <div className='wrapper'> 
+                <button className='button' name='0' onClick={props.handleNumbers} value={props.display}>0</button>
+                <button className='button' name='.' onClick={props.handleDecimal} value={props.display}>.</button>
+                <button id='equal' className='orange' name='=' onClick={props.handleEqualSign} value={props.display}>=</button>
+            </div>
+
+        </div>
+    )
 }
+
 
 export default Calculator;
