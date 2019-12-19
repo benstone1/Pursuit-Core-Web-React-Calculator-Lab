@@ -33,23 +33,23 @@ class App extends React.Component {
 
   handleValue = (event) => {
     const { displayValue } = this.state
-    let num = event.target.value 
-    console.log(this.state.displayValue)
-    // if(this.state.displayValue === 0){
-      // console.log("It is zero")
+    let num = displayValue.toString()
+    console.log(num.slice(0,displayValue.length))
+    console.log(num[0])
+    if(num[0] === "0"){
+      console.log("It is zero")
       this.setState({
 
         displayValue: event.target.value 
       })
   
-    // }
-    // else{
-    //   this.setState({
-
-    //     displayValue: event.target.value + displayValue
-    //   })
-    // }
-
+    }
+    else{
+      console.log("noZero")
+      this.setState({
+        displayValue: displayValue + event.target.value
+      })
+    }
   
   }
 
@@ -77,7 +77,7 @@ class App extends React.Component {
     this.setState({
       operation: event.target.value,
       previousValue: displayValue,
-
+      displayValue: "",
     })
     if (this.state.operation === "+") {
       let additionValue = Number(displayValue) + Number(previousValue)
