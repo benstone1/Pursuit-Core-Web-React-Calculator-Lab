@@ -28,49 +28,39 @@ class App extends React.Component {
       // waitingForNewValue: false,
       negative: false,
     })
-
   }
 
   handleValue = (event) => {
     const { displayValue } = this.state
     let num = displayValue.toString()
-    console.log(num.slice(0,displayValue.length))
-    console.log(num[0])
-    if(num[0] === "0"){
-      console.log("It is zero")
+    if (num[0] === "0" && !num.includes(".")) {
       this.setState({
-
-        displayValue: event.target.value 
+        displayValue: event.target.value
       })
-  
     }
-    else{
-      console.log("noZero")
+    else {
       this.setState({
         displayValue: displayValue + event.target.value
       })
     }
-  
+
   }
 
   handleNegative = (event) => {
     const { displayValue, negative } = this.state
-    console.log(event.target.value)
-    console.log()
     if (negative === false) {
       this.setState({
         displayValue: displayValue * -1,
         negative: true
-
       })
     } else {
       this.setState({
         displayValue: displayValue * -1,
         negative: false
-
       })
     }
   }
+
 
   handleOperationWhenClicked = (event) => {
     const { operation, displayValue, previousValue } = this.state
@@ -102,10 +92,7 @@ class App extends React.Component {
         negative: false,
       })
     } else if (this.state.operation === "/") {
-      console.log("displayValue", displayValue)
-      console.log("previousValue", previousValue)
       let DivisionValue = Number(previousValue) / Number(displayValue)
-      console.log(9/3)
       this.setState({
         displayValue: DivisionValue,
         operation: null,
@@ -126,10 +113,16 @@ class App extends React.Component {
   handleDecimal = (event) => {
     let decimal = event.target.value
     const { displayValue } = this.state
-    this.setState({
-      displayValue: displayValue + decimal
+    if (!displayValue.includes(".")) {
+      this.setState({
+        displayValue: displayValue + decimal
+      })
+    } else {
+      this.setState({
+        displayValue: displayValue
+      })
+    }
 
-    })
   }
 
 
