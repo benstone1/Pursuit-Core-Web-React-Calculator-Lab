@@ -80,7 +80,7 @@ class App extends React.Component {
       displayValue: "",
     })
     if (this.state.operation === "+") {
-      let additionValue = Number(displayValue) + Number(previousValue)
+      let additionValue = Number(previousValue) + Number(displayValue)
 
       this.setState({
         displayValue: additionValue,
@@ -88,21 +88,24 @@ class App extends React.Component {
         negative: false,
       })
     } else if (this.state.operation === "-") {
-      let subtractionValue = Number(displayValue) - Number(previousValue)
+      let subtractionValue = Number(previousValue) - Number(displayValue)
       this.setState({
         displayValue: subtractionValue,
         operation: null,
         negative: false,
       })
     } else if (operation === "*") {
-      let multiplicationValue = Number(displayValue) * Number(previousValue)
+      let multiplicationValue = Number(previousValue) * Number(displayValue)
       this.setState({
         displayValue: multiplicationValue,
         operation: null,
         negative: false,
       })
     } else if (this.state.operation === "/") {
-      let DivisionValue = Number(displayValue) / Number(previousValue)
+      console.log("displayValue", displayValue)
+      console.log("previousValue", previousValue)
+      let DivisionValue = Number(previousValue) / Number(displayValue)
+      console.log(9/3)
       this.setState({
         displayValue: DivisionValue,
         operation: null,
