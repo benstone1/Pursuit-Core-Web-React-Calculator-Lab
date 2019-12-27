@@ -7,20 +7,21 @@ class App extends React.Component {
   constructor(props) {
    super(props)
    this.state = {
-     display: '0',
+     display: '',
      newValue: null,
      previousValue: null,
      decimal: false,
      operation: null,
      waitingForNewValue: false,
-    //  name: this.props.name
-    num: ''
+    name:''
+    // num: '',
+    // displayValue: ''
     }
  }
 
   handleACButton = () => {
    this.setState({
-     display: 0,
+     display: '',
      previousValue: null,
      decimal: false,
      operation: null,
@@ -29,25 +30,22 @@ class App extends React.Component {
    })
   }
 
-  handleClick = (e) => {
-    // const{ name} = this.state
-    this.setState({
-      display: e.target.value
-    })
-    console.log('button has been clicked', e.target.value)
-  }
+  // handleClick = (e) => {
+  //   // const{ name} = this.state
+  //   this.setState({
+  //     display:this.state.display
+  //   })
+  //   console.log('button has been clicked', this.state.display)
+  // }
 
-  handleNumbers = (num) => {
-    const {waitingForNewValue} = this.state
-   if (waitingForNewValue) {
+  handleNumbers = (e) => {
+   
       this.setState({
-        display: Number(num),
-        waitingForNewValue: false
+        display: e.target.name
       })
-   } 
-    this.setState({
-      // display: display='0'
-    })
+     
+  //  } 
+    
   }
 
   handleOperation = () => {
@@ -87,11 +85,12 @@ class App extends React.Component {
   // }
 
   render() {
-    const {display} = this.state
+    const {display, displayValue} = this.state
     return(
       <div className='App'>
         <Calculator
           display= {display}
+          displayValue = {displayValue}
           handleACButton={this.handleACButton}
           handleDecimal={this.handleDecimal}
           handleEqualSign={this.handleEqualSign}
