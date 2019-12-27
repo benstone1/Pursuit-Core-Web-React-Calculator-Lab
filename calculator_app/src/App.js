@@ -12,10 +12,7 @@ class App extends React.Component {
      previousValue: null,
      decimal: false,
      operation: null,
-     waitingForNewValue: false,
-    name:''
-    // num: '',
-    // displayValue: ''
+     waitingForNewValue: false
     }
  }
 
@@ -30,37 +27,28 @@ class App extends React.Component {
    })
   }
 
-  // handleClick = (e) => {
-  //   // const{ name} = this.state
-  //   this.setState({
-  //     display:this.state.display
-  //   })
-  //   console.log('button has been clicked', this.state.display)
-  // }
 
   handleNumbers = (e) => {
-   
-      this.setState({
-        display: e.target.name
-      })
-     
-  //  } 
+    const number  = e.target.name
+    this.setState({
+        display: e.target.value + number
+    })  
     
   }
 
-  handleOperation = () => {
-    const{previousValue, newValue} = this.state
+  handleOperation = (e) => {
+    const operator = e.target.name
 
-    const add = previousValue + newValue;
-    const mul= previousValue * newValue;
-    const div = previousValue / newValue;
-    const sub = previousValue - newValue
-    this.setState({
-      add: add,
-      mul: mul,
-      div: div,
-      sub: sub
-    })
+  //   if (operator === '+' || operator === '-' || operator === '/' || operator === '*') {
+
+  //   }
+  //  this.setState({
+  //   //  previousValue: 
+  //    display: 
+  //  })
+
+  
+  
   }
 
   handlePercentage = (num) => {
@@ -85,12 +73,11 @@ class App extends React.Component {
   // }
 
   render() {
-    const {display, displayValue} = this.state
+    const {display} = this.state
     return(
       <div className='App'>
         <Calculator
           display= {display}
-          displayValue = {displayValue}
           handleACButton={this.handleACButton}
           handleDecimal={this.handleDecimal}
           handleEqualSign={this.handleEqualSign}
