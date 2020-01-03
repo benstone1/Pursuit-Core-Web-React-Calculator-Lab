@@ -1,21 +1,19 @@
 import React from 'react'
+import './Calculation.css'
 
-class Calculation extends React.Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            displayValue = '0'
-        }
-    }
-    
-    render(){
-        let {displayValue} = this.props
-        return(
-            <div className = 'result'>
-                <p>{displayValue}</p>
-            </div>
-        )
-    }
+
+
+const Calculation = (props) => {
+    return (
+        <div className='input'>
+            <input 
+            type= 'text'
+            value= {props.displayValue}
+            displayValue={props.displayValue}
+            />
+        </div>
+    )   
 }
+    
 
 export default Calculation

@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
-import Button from './Components/Button'
+// import Button from './Components/Button'
 import Keypad from './Components/Keypad'
+// import Calculation from './Components/Calculation'
 
 class App extends React.Component {
   constructor(){
