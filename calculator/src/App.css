@@ -1,0 +1,74 @@
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+}
+
+.button {
+  background-color: #e0e0e6;
+  font-size: 40px;
+  text-align: center;
+  color: #666666;
+  border-left: 1px solid #666666;
+  border-bottom: 1px solid #666666;
+  user-select: none;
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  display: block;
+  width: 181px;
+}
+
+button:active {
+  box-shadow: inset 0px 0px 80px 0px rgba(0, 0, 0, 0.25);
+}
+
+.orange {
+  background-color: #ee9b3e;
+  color: #fff;
+  height: 82px;
+}
+
+.calc {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 90vw;
+}
+
+.buttons {
+  width: 50vw;
+  height: 412px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-right: -78px;
+  margin-left: -75px;
+}
+.display {
+  margin-right: -6px;
+  margin-left: -150px;
+  width: 50.4vw;
+  font-size: 5em;
+  color: #fff;
+  text-align: right;
+  background-color: #333;
+}
+.col-6 {
+  width: 361px;
+}
+
+.holder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.operators {
+  height: 412px;
+  margin-left: -100px;
+  margin-right: 69px;
+}
